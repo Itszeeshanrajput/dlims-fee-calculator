@@ -1,0 +1,430 @@
+{
+  "source_url": "https://dlims.punjab.gov.pk/fee_structure",
+  "courier_default": 480,
+  "learner_permit_fee_per_category": 500,
+  "regular_license": [
+    {
+      "category": "M/Cycle",
+      "test_fee": 50,
+      "fee_after_passing": 450,
+      "courier_fee": 480,
+      "total_excl_test": 930,
+      "total_incl_test": 980
+    },
+    {
+      "category": "Rickshaw",
+      "test_fee": 100,
+      "fee_after_passing": 400,
+      "courier_fee": 480,
+      "total_excl_test": 880,
+      "total_incl_test": 980
+    },
+    {
+      "category": "Car/Jeep",
+      "test_fee": 150,
+      "fee_after_passing": 1350,
+      "courier_fee": 480,
+      "total_excl_test": 1830,
+      "total_incl_test": 1980
+    },
+    {
+      "category": "Tractor Agri",
+      "test_fee": 50,
+      "fee_after_passing": 950,
+      "courier_fee": 480,
+      "total_excl_test": 1430,
+      "total_incl_test": 1480
+    },
+    {
+      "category": "Tractor Commercial",
+      "test_fee": 100,
+      "fee_after_passing": 1400,
+      "courier_fee": 480,
+      "total_excl_test": 1880,
+      "total_incl_test": 1980
+    },
+    {
+      "category": "LTV",
+      "test_fee": 150,
+      "fee_after_passing": 1850,
+      "courier_fee": 480,
+      "total_excl_test": 2330,
+      "total_incl_test": 2480
+    },
+    {
+      "category": "Invalid Carriage",
+      "test_fee": 0,
+      "fee_after_passing": 0,
+      "courier_fee": 480,
+      "total_excl_test": 480,
+      "total_incl_test": 480
+    },
+    {
+      "category": "M/Cycle+Car/Jeep",
+      "test_fee": 200,
+      "fee_after_passing": 1350,
+      "courier_fee": 480,
+      "total_excl_test": 1830,
+      "total_incl_test": 2030
+    },
+    {
+      "category": "M/Cycle+LTV",
+      "test_fee": 200,
+      "fee_after_passing": 1850,
+      "courier_fee": 480,
+      "total_excl_test": 2330,
+      "total_incl_test": 2530
+    }
+  ],
+  "regular_license_renewal": [
+    {
+      "category": "M/Cycle",
+      "renewal_fee_1yr": 450,
+      "fine_1_to_3m": 225,
+      "fine_3m_to_1y": 450,
+      "fine_over_1y": 1125,
+      "courier_fee": 480,
+      "total_without_fine": 930
+    },
+    {
+      "category": "Tractor Commercial",
+      "renewal_fee_1yr": 1400,
+      "fine_1_to_3m": 700,
+      "fine_3m_to_1y": 1400,
+      "fine_over_1y": 3500,
+      "courier_fee": 480,
+      "total_without_fine": 1880
+    },
+    {
+      "category": "Rickshaw",
+      "renewal_fee_1yr": 400,
+      "fine_1_to_3m": 200,
+      "fine_3m_to_1y": 400,
+      "fine_over_1y": 1000,
+      "courier_fee": 480,
+      "total_without_fine": 880
+    },
+    {
+      "category": "Car/Jeep",
+      "renewal_fee_1yr": 1350,
+      "fine_1_to_3m": 675,
+      "fine_3m_to_1y": 1350,
+      "fine_over_1y": 3375,
+      "courier_fee": 480,
+      "total_without_fine": 1830
+    },
+    {
+      "category": "M/Cycle+M/Car",
+      "renewal_fee_1yr": 1350,
+      "fine_1_to_3m": 675,
+      "fine_3m_to_1y": 1350,
+      "fine_over_1y": 3375,
+      "courier_fee": 480,
+      "total_without_fine": 1830
+    },
+    {
+      "category": "Agriculture",
+      "renewal_fee_1yr": 1350,
+      "fine_1_to_3m": 675,
+      "fine_3m_to_1y": 1350,
+      "fine_over_1y": 3375,
+      "courier_fee": 480,
+      "total_without_fine": 1830
+    },
+    {
+      "category": "LTV",
+      "renewal_fee_1yr": 1850,
+      "fine_1_to_3m": 925,
+      "fine_3m_to_1y": 1850,
+      "fine_over_1y": 4625,
+      "courier_fee": 480,
+      "total_without_fine": 2330
+    },
+    {
+      "category": "M/Cycle+LTV",
+      "renewal_fee_1yr": 1850,
+      "fine_1_to_3m": 925,
+      "fine_3m_to_1y": 1850,
+      "fine_over_1y": 4625,
+      "courier_fee": 480,
+      "total_without_fine": 2330
+    },
+    {
+      "category": "LTV + PSV",
+      "renewal_fee_1yr": 1850,
+      "fine_1_to_3m": 925,
+      "fine_3m_to_1y": 1850,
+      "fine_over_1y": 4625,
+      "courier_fee": 480,
+      "total_without_fine": 2330
+    },
+    {
+      "category": "M/Cycle+LTV+Trac Com",
+      "renewal_fee_1yr": 1850,
+      "fine_1_to_3m": 925,
+      "fine_3m_to_1y": 1850,
+      "fine_over_1y": 4625,
+      "courier_fee": 480,
+      "total_without_fine": 2330
+    },
+    {
+      "category": "HTV",
+      "renewal_fee_1yr": 1850,
+      "fine_1_to_3m": 925,
+      "fine_3m_to_1y": 1850,
+      "fine_over_1y": 4625,
+      "courier_fee": 480,
+      "total_without_fine": 2330
+    },
+    {
+      "category": "M/Cycle+PSV",
+      "renewal_fee_1yr": 1850,
+      "fine_1_to_3m": 925,
+      "fine_3m_to_1y": 1850,
+      "fine_over_1y": 4625,
+      "courier_fee": 480,
+      "total_without_fine": 2330
+    },
+    {
+      "category": "HTV + PSV",
+      "renewal_fee_1yr": 1850,
+      "fine_1_to_3m": 925,
+      "fine_3m_to_1y": 1850,
+      "fine_over_1y": 4625,
+      "courier_fee": 480,
+      "total_without_fine": 2330
+    },
+    {
+      "category": "Tractor Agri",
+      "renewal_fee_1yr": 980,
+      "fine_1_to_3m": 475,
+      "fine_3m_to_1y": 950,
+      "fine_over_1y": 2375,
+      "courier_fee": 480,
+      "total_without_fine": 1430
+    },
+    {
+      "category": "Invalid Carriage",
+      "renewal_fee_1yr": 0,
+      "fine_1_to_3m": 0,
+      "fine_3m_to_1y": 0,
+      "fine_over_1y": 0,
+      "courier_fee": 480,
+      "total_without_fine": 480
+    }
+  ],
+  "duplicate_license": [
+    {
+      "category": "M/Cycle",
+      "duplicate_fee": 100,
+      "courier_fee": 480,
+      "total": 580
+    },
+    {
+      "category": "Tractor Commercial",
+      "duplicate_fee": 100,
+      "courier_fee": 480,
+      "total": 580
+    },
+    {
+      "category": "Rickshaw",
+      "duplicate_fee": 100,
+      "courier_fee": 480,
+      "total": 580
+    },
+    {
+      "category": "Car/Jeep",
+      "duplicate_fee": 150,
+      "courier_fee": 480,
+      "total": 630
+    },
+    {
+      "category": "M/Cycle+M/Car",
+      "duplicate_fee": 200,
+      "courier_fee": 480,
+      "total": 680
+    },
+    {
+      "category": "Agriculture",
+      "duplicate_fee": 200,
+      "courier_fee": 480,
+      "total": 680
+    },
+    {
+      "category": "LTV",
+      "duplicate_fee": 150,
+      "courier_fee": 480,
+      "total": 630
+    },
+    {
+      "category": "M/Cycle+LTV",
+      "duplicate_fee": 200,
+      "courier_fee": 480,
+      "total": 680
+    },
+    {
+      "category": "LTV + PSV",
+      "duplicate_fee": 200,
+      "courier_fee": 480,
+      "total": 680
+    },
+    {
+      "category": "M/Cycle+LTV+Trac Com",
+      "duplicate_fee": 200,
+      "courier_fee": 480,
+      "total": 680
+    },
+    {
+      "category": "HTV",
+      "duplicate_fee": 200,
+      "courier_fee": 480,
+      "total": 680
+    },
+    {
+      "category": "M/Cycle+PSV",
+      "duplicate_fee": 200,
+      "courier_fee": 480,
+      "total": 680
+    },
+    {
+      "category": "HTV + PSV",
+      "duplicate_fee": 200,
+      "courier_fee": 480,
+      "total": 680
+    },
+    {
+      "category": "Tractor Agri",
+      "duplicate_fee": 200,
+      "courier_fee": 480,
+      "total": 680
+    },
+    {
+      "category": "Invalid Carriage",
+      "duplicate_fee": 0,
+      "courier_fee": 480,
+      "total": 480
+    }
+  ],
+  "international_license": [
+    {
+      "category": "M/Cycle",
+      "fee_per_annum": 450,
+      "courier_fee": 480,
+      "total_1yr": 930,
+      "total_3yr_fee": 1350,
+      "total_3yr_with_courier": 1830
+    },
+    {
+      "category": "Tractor Commercial",
+      "fee_per_annum": 1400,
+      "courier_fee": 480,
+      "total_1yr": 1880,
+      "total_3yr_fee": 4200,
+      "total_3yr_with_courier": 4680
+    },
+    {
+      "category": "Rickshaw",
+      "fee_per_annum": 400,
+      "courier_fee": 480,
+      "total_1yr": 880,
+      "total_3yr_fee": 1200,
+      "total_3yr_with_courier": 1680
+    },
+    {
+      "category": "Car/Jeep",
+      "fee_per_annum": 1350,
+      "courier_fee": 480,
+      "total_1yr": 1830,
+      "total_3yr_fee": 4050,
+      "total_3yr_with_courier": 4530
+    },
+    {
+      "category": "M/Cycle+M/Car",
+      "fee_per_annum": 1350,
+      "courier_fee": 480,
+      "total_1yr": 1830,
+      "total_3yr_fee": 4050,
+      "total_3yr_with_courier": 4530
+    },
+    {
+      "category": "Agriculture",
+      "fee_per_annum": 1350,
+      "courier_fee": 480,
+      "total_1yr": 1830,
+      "total_3yr_fee": 5550,
+      "total_3yr_with_courier": 4530
+    },
+    {
+      "category": "LTV",
+      "fee_per_annum": 1850,
+      "courier_fee": 480,
+      "total_1yr": 2330,
+      "total_3yr_fee": 5550,
+      "total_3yr_with_courier": 6030
+    },
+    {
+      "category": "M/Cycle+LTV",
+      "fee_per_annum": 1850,
+      "courier_fee": 480,
+      "total_1yr": 2330,
+      "total_3yr_fee": 5550,
+      "total_3yr_with_courier": 6030
+    },
+    {
+      "category": "LTV + PSV",
+      "fee_per_annum": 1850,
+      "courier_fee": 480,
+      "total_1yr": 2330,
+      "total_3yr_fee": 5550,
+      "total_3yr_with_courier": 6030
+    },
+    {
+      "category": "M/Cycle+LTV+Trac Com",
+      "fee_per_annum": 1850,
+      "courier_fee": 480,
+      "total_1yr": 2330,
+      "total_3yr_fee": 5550,
+      "total_3yr_with_courier": 6030
+    },
+    {
+      "category": "HTV",
+      "fee_per_annum": 1850,
+      "courier_fee": 480,
+      "total_1yr": 2330,
+      "total_3yr_fee": 5550,
+      "total_3yr_with_courier": 6030
+    },
+    {
+      "category": "M/Cycle+PSV",
+      "fee_per_annum": 1850,
+      "courier_fee": 480,
+      "total_1yr": 2330,
+      "total_3yr_fee": 5550,
+      "total_3yr_with_courier": 6030
+    },
+    {
+      "category": "HTV + PSV",
+      "fee_per_annum": 1850,
+      "courier_fee": 480,
+      "total_1yr": 2330,
+      "total_3yr_fee": 5550,
+      "total_3yr_with_courier": 6030
+    },
+    {
+      "category": "Tractor Agri",
+      "fee_per_annum": 950,
+      "courier_fee": 480,
+      "total_1yr": 1430,
+      "total_3yr_fee": 2850,
+      "total_3yr_with_courier": 3330
+    },
+    {
+      "category": "Invalid Carriage",
+      "fee_per_annum": 0,
+      "courier_fee": 480,
+      "total_1yr": 480,
+      "total_3yr_fee": 0,
+      "total_3yr_with_courier": 480
+    }
+  ]
+}
