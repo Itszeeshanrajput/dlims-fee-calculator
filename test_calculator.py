@@ -1,148 +1,76 @@
 #!/usr/bin/env python3
 """
-Unit Test Suite for DLIMS Punjab Driving License Fee Calculator
-Verifies 100% mathematical and regulatory correctness against the official Punjab DLIMS data.
+Unit Test Suite for DLIMS Punjab Driving License Renewal Fee Calculator
+Tests renewal logic, date parsing, late fines, Dastak facilitator, and courier fees.
 """
 
 import unittest
-from calculator import (
-    calculate_regular_fee,
-    calculate_renewal_fee,
-    calculate_duplicate_fee,
-    calculate_international_fee,
-    calculate_learner_fee,
-    FEE_DATA
-)
+import datetime
+from calculator import calculate_renewal, get_fine_from_expiry_date, RATES
 
-class TestDLIMSPreciseCalculations(unittest.TestCase):
+class TestRenewalCalculations(unittest.TestCase):
 
-    # 1. Test Regular License
-    def test_regular_license_motorcycle(self):
-        # M/Cycle: Test 50, Fee 450, Courier 480 -> Total incl test = 980, excl test = 930
-        res = calculate_regular_fee("M/Cycle", include_test_fee=True, include_courier=True)
-        self.assertEqual(res["base_license_fee"], 450)
-        self.assertEqual(res["test_fee"], 50)
-        self.assertEqual(res["courier_fee"], 480)
-        self.assertEqual(res["total_fee"], 980)
-
-        # Excl test
-        res_no_test = calculate_regular_fee("M/Cycle", include_test_fee=False, include_courier=True)
-        self.assertEqual(res_no_test["total_fee"], 930)
-
-        # Excl courier
-        res_no_courier = calculate_regular_fee("M/Cycle", include_test_fee=True, include_courier=False)
-        self.assertEqual(res_no_courier["total_fee"], 500)
-
-    def test_regular_license_car_jeep(self):
-        # Car/Jeep: Test 150, Fee 1350, Courier 480 -> Total incl test = 1980
-        res = calculate_regular_fee("Car/Jeep", include_test_fee=True, include_courier=True)
-        self.assertEqual(res["base_license_fee"], 1350)
-        self.assertEqual(res["test_fee"], 150)
-        self.assertEqual(res["courier_fee"], 480)
-        self.assertEqual(res["total_fee"], 1980)
-
-    def test_regular_license_combo(self):
-        # M/Cycle+Car/Jeep: Test 200, Fee 1350, Courier 480 -> Total = 2030
-        res = calculate_regular_fee("M/Cycle+Car/Jeep", include_test_fee=True, include_courier=True)
-        self.assertEqual(res["base_license_fee"], 1350)
-        self.assertEqual(res["test_fee"], 200)
-        self.assertEqual(res["courier_fee"], 480)
-        self.assertEqual(res["total_fee"], 2030)
-
-    def test_regular_license_invalid_carriage(self):
-        # Invalid carriage: Free fee, Free test, 480 courier
-        res = calculate_regular_fee("Invalid Carriage", include_test_fee=True, include_courier=True)
-        self.assertEqual(res["base_license_fee"], 0)
-        self.assertEqual(res["test_fee"], 0)
-        self.assertEqual(res["courier_fee"], 480)
-        self.assertEqual(res["total_fee"], 480)
-
-    # 2. Test Renewal & Fines
-    def test_renewal_motorcycle_fines(self):
-        # Base annual: 450, Courier: 480
-        # No fine: 450 + 480 = 930
-        r0 = calculate_renewal_fee("M/Cycle", validity_years=1, fine_status="none")
-        self.assertEqual(r0["total_fee"], 930)
-        self.assertEqual(r0["fine"], 0)
-
-        # 1-3 months fine (50% = 225): 450 + 225 + 480 = 1155
-        r1 = calculate_renewal_fee("M/Cycle", validity_years=1, fine_status="1_to_3m")
-        self.assertEqual(r1["fine"], 225)
-        self.assertEqual(r1["total_fee"], 1155)
-
-        # 3-12 months fine (100% = 450): 450 + 450 + 480 = 1380
-        r2 = calculate_renewal_fee("M/Cycle", validity_years=1, fine_status="3m_to_1y")
-        self.assertEqual(r2["fine"], 450)
-        self.assertEqual(r2["total_fee"], 1380)
-
-        # >1 year fine (250% = 1125): 450 + 1125 + 480 = 2055
-        r3 = calculate_renewal_fee("M/Cycle", validity_years=1, fine_status="over_1y")
-        self.assertEqual(r3["fine"], 1125)
-        self.assertEqual(r3["total_fee"], 2055)
-
-        # 5 Years validity on time: 450*5 = 2250 + 480 = 2730
-        r5 = calculate_renewal_fee("M/Cycle", validity_years=5, fine_status="none")
-        self.assertEqual(r5["base_license_fee"], 2250)
-        self.assertEqual(r5["total_fee"], 2730)
-
-    def test_renewal_car_jeep_5_years(self):
-        # Car/Jeep: 1350/yr * 5 = 6750 + 480 courier = 7230
-        res = calculate_renewal_fee("Car/Jeep", validity_years=5, fine_status="none")
+    def test_active_license_no_fine(self):
+        # Expiry 30 days in future -> 0 fine
+        future_date = (datetime.date.today() + datetime.timedelta(days=30)).strftime("%Y-%m-%d")
+        res = calculate_renewal(service="regular", category="Car/Jeep", expiry_date=future_date, years=5, include_facilitator=True, include_courier=True, include_platform=True)
+        # Base: 1350 * 5 = 6750, Fine: 0, Fac: 950, Courier: 480, Plat: 15 -> Total: 8195
         self.assertEqual(res["base_license_fee"], 6750)
-        self.assertEqual(res["total_fee"], 7230)
+        self.assertEqual(res["fine_amount"], 0)
+        self.assertEqual(res["facilitator_fee"], 950)
+        self.assertEqual(res["courier_fee"], 480)
+        self.assertEqual(res["platform_fee"], 15)
+        self.assertEqual(res["total_fee"], 8195)
 
-        # Expired 3m-1y (100% fine = 1350): 6750 + 1350 + 480 = 8580
-        res_fine = calculate_renewal_fee("Car/Jeep", validity_years=5, fine_status="3m_to_1y")
-        self.assertEqual(res_fine["fine"], 1350)
-        self.assertEqual(res_fine["total_fee"], 8580)
+    def test_grace_period_no_fine(self):
+        # Expired 15 days ago -> within 30-day grace period -> 0 fine
+        grace_date = (datetime.date.today() - datetime.timedelta(days=15)).strftime("%Y-%m-%d")
+        res = calculate_renewal(service="regular", category="M/Cycle", expiry_date=grace_date, years=1, include_facilitator=False, include_courier=True, include_platform=True)
+        # Base: 450 * 1 = 450, Fine: 0, Courier: 480, Plat: 15 -> Total: 945
+        self.assertEqual(res["base_license_fee"], 450)
+        self.assertEqual(res["fine_amount"], 0)
+        self.assertEqual(res["total_fee"], 945)
 
-    # 3. Test Duplicate License
-    def test_duplicate_licenses(self):
-        # M/Cycle duplicate: 100 + 480 = 580
-        res_bike = calculate_duplicate_fee("M/Cycle")
-        self.assertEqual(res_bike["base_license_fee"], 100)
-        self.assertEqual(res_bike["total_fee"], 580)
+    def test_fine_1_to_3_months(self):
+        # Expired 45 days ago -> 50% fine
+        expired_date = (datetime.date.today() - datetime.timedelta(days=45)).strftime("%Y-%m-%d")
+        res = calculate_renewal(service="regular", category="Car/Jeep", expiry_date=expired_date, years=1, include_facilitator=False, include_courier=False, include_platform=False)
+        # Base: 1350, Fine: 675 -> Total: 2025
+        self.assertEqual(res["base_license_fee"], 1350)
+        self.assertEqual(res["fine_amount"], 675)
+        self.assertEqual(res["total_fee"], 2025)
 
-        # Car/Jeep duplicate: 150 + 480 = 630
-        res_car = calculate_duplicate_fee("Car/Jeep")
-        self.assertEqual(res_car["base_license_fee"], 150)
-        self.assertEqual(res_car["total_fee"], 630)
+    def test_fine_3_to_12_months(self):
+        # Expired 180 days ago -> 100% fine
+        expired_date = (datetime.date.today() - datetime.timedelta(days=180)).strftime("%Y-%m-%d")
+        res = calculate_renewal(service="regular", category="LTV", expiry_date=expired_date, years=3, include_facilitator=False, include_courier=False, include_platform=False)
+        # LTV Base: 1850 * 3 = 5550, Fine: 1850 -> Total: 7400
+        self.assertEqual(res["base_license_fee"], 5550)
+        self.assertEqual(res["fine_amount"], 1850)
+        self.assertEqual(res["total_fee"], 7400)
 
-        # HTV duplicate: 200 + 480 = 680
-        res_htv = calculate_duplicate_fee("HTV")
-        self.assertEqual(res_htv["base_license_fee"], 200)
-        self.assertEqual(res_htv["total_fee"], 680)
+    def test_fine_over_1_year(self):
+        # Expired 400 days ago -> 250% fine
+        expired_date = (datetime.date.today() - datetime.timedelta(days=400)).strftime("%Y-%m-%d")
+        res = calculate_renewal(service="regular", category="M/Cycle", expiry_date=expired_date, years=1, include_facilitator=False, include_courier=False, include_platform=False)
+        # Motorcycle: 450, Fine: 1125 -> Total: 1575
+        self.assertEqual(res["base_license_fee"], 450)
+        self.assertEqual(res["fine_amount"], 1125)
+        self.assertEqual(res["total_fee"], 1575)
 
-    # 4. Test International License
-    def test_international_license(self):
-        # Car/Jeep 1 Year: 1350 + 480 = 1830
-        res_1y = calculate_international_fee("Car/Jeep", validity_years=1)
-        self.assertEqual(res_1y["base_license_fee"], 1350)
-        self.assertEqual(res_1y["total_fee"], 1830)
+    def test_international_max_3_years(self):
+        # Asking for 5 years for international should clamp to 3 years
+        future_date = (datetime.date.today() + datetime.timedelta(days=10)).strftime("%Y-%m-%d")
+        res = calculate_renewal(service="international", category="Car/Jeep", expiry_date=future_date, years=5, include_facilitator=False, include_courier=False, include_platform=False)
+        self.assertEqual(res["years"], 3)
+        self.assertEqual(res["base_license_fee"], 1350 * 3)
 
-        # Car/Jeep 3 Years: 4050 + 480 = 4530
-        res_3y = calculate_international_fee("Car/Jeep", validity_years=3)
-        self.assertEqual(res_3y["base_license_fee"], 4050)
-        self.assertEqual(res_3y["total_fee"], 4530)
-
-        # LTV 3 Years: 5550 + 480 = 6030
-        res_ltv = calculate_international_fee("LTV", validity_years=3)
-        self.assertEqual(res_ltv["base_license_fee"], 5550)
-        self.assertEqual(res_ltv["total_fee"], 6030)
-
-    # 5. Test Learner Driving License
-    def test_learner_license(self):
-        # 1 Category: Rs. 500
-        res_1 = calculate_learner_fee(["M/Cycle"])
-        self.assertEqual(res_1["total_fee"], 500)
-
-        # 2 Categories (Bike + Car): Rs. 1000
-        res_2 = calculate_learner_fee(["M/Cycle", "Car/Jeep"])
-        self.assertEqual(res_2["total_fee"], 1000)
-
-        # 3 Categories (Bike + Car + LTV): Rs. 1500
-        res_3 = calculate_learner_fee(["M/Cycle", "Car/Jeep", "LTV"])
-        self.assertEqual(res_3["total_fee"], 1500)
+    def test_invalid_carriage_free(self):
+        # Invalid carriage is free base and free fine
+        res = calculate_renewal(service="regular", category="Invalid Carriage", expiry_date="2020-01-01", years=5, include_facilitator=False, include_courier=False, include_platform=False)
+        self.assertEqual(res["base_license_fee"], 0)
+        self.assertEqual(res["fine_amount"], 0)
+        self.assertEqual(res["total_fee"], 0)
 
 if __name__ == "__main__":
     unittest.main()

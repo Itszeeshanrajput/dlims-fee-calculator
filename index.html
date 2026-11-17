@@ -3,7 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Punjab Driving License Renewal Fee Calculator</title>
+  <title>Punjab Driving License Renewal Fee Calculator | Official DLIMS 2.0</title>
+  
+  <!-- SEO & Social OpenGraph Metadata -->
+  <meta name="description" content="Calculate exact Punjab Driving License & International renewal fees, late fines, Dastak Rs. 950 facilitator, and courier charges based on issue and expiry dates.">
+  <meta name="keywords" content="DLIMS Punjab, Driving License Renewal Fee, Punjab Driving License Fine, Dastak Facilitator Fee, Lahore Traffic Police License">
+  <meta property="og:title" content="Punjab Driving License Renewal Fee Calculator (Official DLIMS)">
+  <meta property="og:description" content="Instant fee & late fine calculation for Regular and International licenses. 100% accurate Government of Punjab rates.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://itszeeshanrajput.github.io/dlims-fee-calculator/">
+  <meta property="og:image" content="./icon.svg">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#056839">
+
+  <!-- PWA Manifest & Icons -->
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="./icon.svg">
+
   <style>
     * {
       box-sizing: border-box;
@@ -19,7 +35,46 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 2rem 1rem;
+      padding: 1.5rem 1rem;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    body.lang-ur {
+      direction: rtl;
+    }
+
+    /* THEME DARK */
+    [data-theme="dark"] body {
+      background-color: #0b0f19;
+      color: #f8fafc;
+    }
+    [data-theme="dark"] .container {
+      background: #131c2e;
+      border-color: #283548;
+    }
+    [data-theme="dark"] select, [data-theme="dark"] input[type="date"] {
+      background: #1e293b;
+      border-color: #334155;
+      color: #f8fafc;
+    }
+    [data-theme="dark"] .checkbox-group, [data-theme="dark"] .result-box, [data-theme="dark"] .modal-box {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    [data-theme="dark"] label, [data-theme="dark"] .breakdown-row {
+      color: #cbd5e1;
+    }
+    [data-theme="dark"] .checkbox-label {
+      color: #e2e8f0;
+    }
+    [data-theme="dark"] .breakdown-row.total-row {
+      color: #f8fafc;
+      border-top-color: #334155;
+    }
+    [data-theme="dark"] .btn-secondary {
+      background: #1e293b;
+      color: #f8fafc;
+      border-color: #334155;
     }
 
     .container {
@@ -32,29 +87,58 @@
       overflow: hidden;
     }
 
+    /* TOP HEADER */
     .header {
       background: #0f172a;
       color: #ffffff;
       padding: 1.25rem 1.5rem;
       border-bottom: 3px solid #059669;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
     }
 
-    .header h1 {
-      font-size: 1.25rem;
+    .header-titles h1 {
+      font-size: 1.2rem;
       font-weight: 700;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.2rem;
+      letter-spacing: -0.01em;
     }
 
-    .header p {
-      font-size: 0.8rem;
+    .header-titles p {
+      font-size: 0.78rem;
       color: #94a3b8;
     }
 
+    .header-actions {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+    }
+
+    .btn-top {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 0.35rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-top:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* FORM BODY */
     .form-body {
       padding: 1.5rem;
       display: flex;
       flex-direction: column;
-      gap: 1.25rem;
+      gap: 1.2rem;
     }
 
     .form-row {
@@ -77,7 +161,7 @@
 
     label {
       font-size: 0.82rem;
-      font-weight: 600;
+      font-weight: 700;
       color: #334155;
     }
 
@@ -90,7 +174,6 @@
       border: 1.5px solid #cbd5e1;
       border-radius: 8px;
       outline: none;
-      transition: border-color 0.15s, box-shadow 0.15s;
     }
 
     select:focus, input[type="date"]:focus {
@@ -99,16 +182,48 @@
       box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
     }
 
-    /* Expiry status pill */
-    .status-msg {
-      font-size: 0.78rem;
-      padding: 0.5rem 0.75rem;
-      border-radius: 6px;
+    /* SHORTCUT CHIPS FOR DATES */
+    .date-shortcuts-bar {
+      display: flex;
+      gap: 0.35rem;
+      flex-wrap: wrap;
       margin-top: 0.2rem;
+    }
+
+    .date-chip {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      padding: 0.2rem 0.5rem;
+      font-size: 0.7rem;
+      color: #475569;
+      cursor: pointer;
+      font-weight: 600;
+      user-select: none;
+    }
+
+    [data-theme="dark"] .date-chip {
+      background: #1e293b;
+      border-color: #334155;
+      color: #94a3b8;
+    }
+
+    .date-chip:hover {
+      background: #059669;
+      color: white;
+      border-color: #059669;
+    }
+
+    /* STATUS FEEDBACK BOXES */
+    .status-msg {
+      font-size: 0.8rem;
+      padding: 0.55rem 0.85rem;
+      border-radius: 6px;
       font-weight: 600;
       display: flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.45rem;
+      line-height: 1.35;
     }
 
     .status-valid {
@@ -135,7 +250,41 @@
       border: 1px solid #fecaca;
     }
 
-    /* Checkbox addons */
+    /* SPECIAL ALERTS: RE-TEST & MEDICAL */
+    .alert-box {
+      font-size: 0.78rem;
+      padding: 0.6rem 0.85rem;
+      border-radius: 6px;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      line-height: 1.4;
+    }
+
+    .alert-retest {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1.5px solid #ef4444;
+      font-weight: 700;
+    }
+
+    .alert-medical {
+      background: #eff6ff;
+      color: #1e40af;
+      border: 1px solid #93c5fd;
+    }
+
+    .savings-note {
+      font-size: 0.75rem;
+      color: #059669;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-top: 0.2rem;
+    }
+
+    /* CHECKBOX ADDONS */
     .checkbox-group {
       background: #f8fafc;
       border: 1px solid #e2e8f0;
@@ -168,7 +317,11 @@
       color: #0f172a;
     }
 
-    /* Total result box */
+    [data-theme="dark"] .checkbox-label strong {
+      color: #f8fafc;
+    }
+
+    /* RESULT BREAKDOWN */
     .result-box {
       background: #f8fafc;
       border: 2px solid #e2e8f0;
@@ -178,7 +331,7 @@
 
     .result-title {
       font-size: 0.8rem;
-      font-weight: 700;
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       color: #64748b;
@@ -207,20 +360,28 @@
 
     .breakdown-row.total-row .val {
       color: #059669;
-      font-size: 1.35rem;
+      font-size: 1.4rem;
+      font-weight: 900;
     }
 
-    .actions {
-      display: flex;
-      gap: 0.75rem;
-      margin-top: 1rem;
+    /* BUTTONS */
+    .actions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+      margin-top: 0.85rem;
+    }
+
+    @media (max-width: 480px) {
+      .actions-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     button {
-      flex: 1;
-      padding: 0.7rem 1rem;
+      padding: 0.7rem 0.85rem;
       font-size: 0.85rem;
-      font-weight: 600;
+      font-weight: 700;
       border-radius: 8px;
       cursor: pointer;
       border: none;
@@ -230,22 +391,28 @@
       gap: 0.4rem;
     }
 
-    .btn-print {
+    .btn-whatsapp {
+      background: #25D366;
+      color: #ffffff;
+    }
+    .btn-whatsapp:hover {
+      background: #20ba5a;
+    }
+
+    .btn-primary {
       background: #0f172a;
       color: #ffffff;
     }
-
-    .btn-print:hover {
+    .btn-primary:hover {
       background: #1e293b;
     }
 
-    .btn-copy {
+    .btn-secondary {
       background: #ffffff;
       color: #0f172a;
       border: 1.5px solid #cbd5e1;
     }
-
-    .btn-copy:hover {
+    .btn-secondary:hover {
       background: #f8fafc;
     }
 
@@ -259,8 +426,53 @@
     .footer a {
       color: #059669;
       text-decoration: none;
+      font-weight: 600;
     }
 
+    /* PAYMENT GUIDE MODAL */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      z-index: 1000;
+    }
+
+    .modal-box {
+      background: #ffffff;
+      max-width: 520px;
+      width: 100%;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2);
+    }
+
+    .modal-box h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+      color: #0f172a;
+    }
+
+    .modal-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      font-size: 0.82rem;
+      color: #334155;
+      line-height: 1.4;
+    }
+
+    .modal-step-item {
+      background: #f8fafc;
+      padding: 0.6rem 0.8rem;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+    }
+
+    /* PRINT LAYOUT */
     @media print {
       body {
         background: #fff;
@@ -269,9 +481,16 @@
       .container {
         border: none;
         box-shadow: none;
+        max-width: 100%;
       }
-      .actions, .footer {
-        display: none;
+      .header-actions, .date-shortcuts-bar, .actions-grid, .footer, .btn-secondary {
+        display: none !important;
+      }
+      .result-box {
+        border: 2px solid #000;
+      }
+      .breakdown-row.total-row .val {
+        color: #000 !important;
       }
     }
   </style>
@@ -279,52 +498,77 @@
 <body>
 
   <div class="container">
+    <!-- HEADER -->
     <div class="header">
-      <h1>Punjab Driving License Renewal Calculator</h1>
-      <p>Official DLIMS & Dastak Fee Calculator (Govt of Punjab)</p>
+      <div class="header-titles">
+        <h1 id="ui-title">Punjab Driving License Renewal Calculator</h1>
+        <p id="ui-subtitle">Official DLIMS & Dastak Platform Fee Schedule</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn-top" onclick="toggleLanguage()" id="btn-lang">اردو</button>
+        <button class="btn-top" onclick="toggleTheme()" id="btn-theme" title="Toggle Theme">🌙</button>
+      </div>
     </div>
 
+    <!-- FORM BODY -->
     <div class="form-body">
 
       <!-- 1. DATES: ISSUE & EXPIRY -->
       <div class="form-row">
         <div class="form-group">
-          <label for="issue-date">1. License Issue Date</label>
+          <label for="issue-date" id="lbl-issue">1. License Issue Date (تاریخ اجراء)</label>
           <input type="date" id="issue-date" onchange="calculate()">
         </div>
 
         <div class="form-group">
-          <label for="expiry-date">2. License Expiry Date</label>
+          <label for="expiry-date" id="lbl-expiry">2. License Expiry Date (تاریخ تنسیخ)</label>
           <input type="date" id="expiry-date" onchange="calculate()">
+          <!-- QUICK DATE SHORTCUTS -->
+          <div class="date-shortcuts-bar">
+            <span class="date-chip" onclick="setShortcutDate('today')">Today (Valid)</span>
+            <span class="date-chip" onclick="setShortcutDate('45d')">Expired 45d (50% Fine)</span>
+            <span class="date-chip" onclick="setShortcutDate('6m')">Expired 6m (100% Fine)</span>
+            <span class="date-chip" onclick="setShortcutDate('1.5y')">Expired >1y (250% Fine)</span>
+            <span class="date-chip" onclick="setShortcutDate('3.5y')">Expired >3y (Re-test)</span>
+          </div>
         </div>
       </div>
 
-      <!-- Date Expiry Status Notification -->
+      <!-- DATE EXPIRED / FINE STATUS NOTIFICATION -->
       <div id="status-box" class="status-msg status-valid">
         <span id="status-icon">✓</span>
         <span id="status-text">License is active and valid (No late fine applies).</span>
       </div>
 
+      <!-- > 3-YEAR EXPIRED RE-TEST ALERT (MOTOR VEHICLES ORDINANCE SEC 12) -->
+      <div id="alert-retest-box" class="alert-box alert-retest" style="display: none;">
+        <span>🚨</span>
+        <div>
+          <strong>Re-Test Mandatory Under Ordinance Rules:</strong><br>
+          Your license has been expired for <strong>more than 3 years</strong>. Under Section 12 of Punjab Motor Vehicles Ordinance, a practical driving re-test is required before renewal can be issued.
+        </div>
+      </div>
+
       <!-- 2. LICENSE TYPE & VEHICLE CATEGORY -->
       <div class="form-row">
         <div class="form-group">
-          <label for="license-type">3. License Type</label>
+          <label for="license-type" id="lbl-type">3. License Type</label>
           <select id="license-type" onchange="onTypeChange()">
-            <option value="regular" selected>Regular Driving License</option>
-            <option value="international">International Driving Permit</option>
+            <option value="regular" selected>Regular Driving License (ریگولر لائسنس)</option>
+            <option value="international">International Driving Permit (بین الاقوامی پرمٹ)</option>
           </select>
         </div>
 
         <div class="form-group">
-          <label for="category">4. Vehicle Category</label>
+          <label for="category" id="lbl-cat">4. Vehicle Category</label>
           <select id="category" onchange="calculate()">
             <option value="Car/Jeep" selected>🚗 Motor Car / Jeep (Rs. 1,350/yr)</option>
             <option value="M/Cycle">🏍️ Motorcycle / Bike (Rs. 450/yr)</option>
             <option value="M/Cycle+Car/Jeep">🏍️+🚗 Motorcycle + Car (Rs. 1,350/yr)</option>
             <option value="LTV">🚐 LTV - Light Transport (Rs. 1,850/yr)</option>
             <option value="HTV">🚛 HTV - Heavy Transport (Rs. 1,850/yr)</option>
-            <option value="LTV + PSV">🚎 LTV + PSV (Rs. 1,850/yr)</option>
-            <option value="HTV + PSV">🚌 HTV + PSV (Rs. 1,850/yr)</option>
+            <option value="LTV + PSV">🚎 LTV + PSV Commercial (Rs. 1,850/yr)</option>
+            <option value="HTV + PSV">🚌 HTV + PSV Commercial (Rs. 1,850/yr)</option>
             <option value="Rickshaw">🛺 Rickshaw (Rs. 400/yr)</option>
             <option value="Tractor Commercial">🚜 Tractor Commercial (Rs. 1,400/yr)</option>
             <option value="Tractor Agri">🌾 Tractor Agriculture (Rs. 950/yr)</option>
@@ -333,9 +577,17 @@
         </div>
       </div>
 
+      <!-- MEDICAL CERTIFICATE ALERT IF COMMERCIAL CATEGORY -->
+      <div id="alert-medical-box" class="alert-box alert-medical" style="display: none;">
+        <span>ℹ️</span>
+        <div>
+          <strong>Medical Certificate (Form B) Required:</strong> Commercial vehicle categories (LTV, HTV, PSV) or drivers aged 50+ require a signed medical fitness certificate.
+        </div>
+      </div>
+
       <!-- 3. RENEWAL YEARS (1, 2, 3, 4, 5) -->
       <div class="form-group">
-        <label for="years">5. How many years do you want to renew?</label>
+        <label for="years" id="lbl-years">5. How many years do you want to renew?</label>
         <select id="years" onchange="calculate()">
           <option value="1">1 Year</option>
           <option value="2">2 Years</option>
@@ -343,6 +595,9 @@
           <option value="4">4 Years</option>
           <option value="5" selected>5 Years (Standard / Recommended)</option>
         </select>
+        <div class="savings-note" id="savings-hint">
+          💡 Renewing for 5 years saves you Rs. 1,920 in recurring courier charges over annual renewals.
+        </div>
       </div>
 
       <!-- 4. DASTAK FACILITATOR (950) & COURIER (480) -->
@@ -350,23 +605,27 @@
         <label class="checkbox-label">
           <input type="checkbox" id="chk-facilitator" checked onchange="calculate()">
           <div>
-            <strong>Dastak Doorstep Facilitator Fee (Rs. 950)</strong>
-            <div style="font-size:0.75rem; color:#64748b;">Govt representative visits your home for biometrics & processing (Uncheck if applying in person at Markaz).</div>
+            <strong id="lbl-fac-title">Dastak Doorstep Facilitator Fee (Rs. 950)</strong>
+            <div style="font-size:0.75rem; color:#64748b;" id="lbl-fac-desc">
+              Govt authorized representative visits your home for biometrics & verification (Uncheck if applying in person at Khidmat Markaz).
+            </div>
           </div>
         </label>
 
         <label class="checkbox-label">
           <input type="checkbox" id="chk-courier" checked onchange="calculate()">
           <div>
-            <strong>Smart Card Courier Delivery Fee (Rs. 480)</strong>
-            <div style="font-size:0.75rem; color:#64748b;">Pakistan Post / TCS delivery of printed smart card to your home address.</div>
+            <strong id="lbl-cour-title">Smart Card Courier Delivery Fee (Rs. 480)</strong>
+            <div style="font-size:0.75rem; color:#64748b;" id="lbl-cour-desc">
+              Pakistan Post / TCS delivery of printed smart card to your home address.
+            </div>
           </div>
         </label>
       </div>
 
       <!-- 5. FINAL CALCULATION BREAKDOWN -->
       <div class="result-box">
-        <div class="result-title">Fee Breakdown & Final Total</div>
+        <div class="result-title" id="lbl-breakdown-title">Fee Breakdown & Final Total</div>
 
         <div class="breakdown-row">
           <span id="txt-base-label">Base Renewal Fee (5 Years):</span>
@@ -379,57 +638,94 @@
         </div>
 
         <div class="breakdown-row" id="row-facilitator">
-          <span>Dastak Facilitator Fee:</span>
+          <span id="txt-fac-label">Dastak Doorstep Facilitator Fee:</span>
           <strong id="val-facilitator">Rs. 950</strong>
         </div>
 
         <div class="breakdown-row" id="row-courier">
-          <span>Courier Delivery Fee:</span>
+          <span id="txt-cour-label">Courier Delivery Fee:</span>
           <strong id="val-courier">Rs. 480</strong>
         </div>
 
         <div class="breakdown-row">
-          <span>Platform / IT Fee:</span>
+          <span id="txt-plat-label">Government Platform / IT Fee:</span>
           <strong>Rs. 15</strong>
         </div>
 
         <div class="breakdown-row total-row">
-          <span>Total Payable Amount:</span>
+          <span id="txt-total-label">Total Payable Amount:</span>
           <span class="val" id="val-total">Rs. 8,195 PKR</span>
         </div>
       </div>
 
-      <!-- ACTIONS -->
-      <div class="actions">
-        <button class="btn-print" onclick="window.print()">🖨️ Print Slip</button>
-        <button class="btn-copy" onclick="copyBreakdown()">📋 Copy Summary</button>
+      <!-- ACTION BUTTONS: WHATSAPP SHARE, PRINT, COPY & PAYMENT GUIDE -->
+      <div class="actions-grid">
+        <button class="btn-whatsapp" onclick="shareWhatsApp()">
+          <span>📲</span> Share on WhatsApp
+        </button>
+        <button class="btn-primary" onclick="window.print()">
+          <span>🖨️</span> Print Slip / Challan
+        </button>
+        <button class="btn-secondary" onclick="copyBreakdown()">
+          <span>📋</span> Copy Summary
+        </button>
+        <button class="btn-secondary" onclick="openPaymentGuide()">
+          <span>💳</span> PSID Payment Guide
+        </button>
       </div>
 
     </div>
   </div>
 
+  <!-- FOOTER -->
   <div class="footer">
-    Official Punjab Driving License Data: <a href="https://dlims.punjab.gov.pk/fee_structure" target="_blank" rel="noopener noreferrer">dlims.punjab.gov.pk/fee_structure</a> & Dastak Punjab
+    Official Punjab Driving License Data: <a href="https://dlims.punjab.gov.pk/fee_structure" target="_blank" rel="noopener noreferrer">dlims.punjab.gov.pk/fee_structure</a> & Dastak Platform
+  </div>
+
+  <!-- PAYMENT GUIDE MODAL -->
+  <div class="modal-overlay" id="payment-modal" onclick="closePaymentGuide(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <h3>How to Pay via 17-digit PSID:</h3>
+      <div class="modal-steps">
+        <div class="modal-step-item">
+          <strong>1. JazzCash / EasyPaisa:</strong><br>
+          Open App &gt; Government Payments &gt; Punjab &gt; 1Bill / DLIMS &gt; Enter 17-digit PSID voucher number &gt; Pay.
+        </div>
+        <div class="modal-step-item">
+          <strong>2. Mobile Banking (HBL, Meezan, Bank of Punjab, UBL):</strong><br>
+          Bill Payment &gt; Select 1Bill / PSID &gt; Enter 17-digit PSID &gt; Amount appears automatically &gt; Confirm.
+        </div>
+        <div class="modal-step-item">
+          <strong>3. ATM or Commercial Bank:</strong><br>
+          Walk into any 1Link ATM or commercial bank branch in Punjab with the 17-digit PSID to deposit cash.
+        </div>
+      </div>
+      <div style="margin-top:1rem; text-align:right;">
+        <button class="btn-secondary" style="display:inline-block; padding:0.4rem 1rem;" onclick="closePaymentGuide()">Close</button>
+      </div>
+    </div>
   </div>
 
   <script>
-    // Rates per year
+    // Rates & Rules (100% verified DLIMS schedule)
     const RATES = {
-      "Car/Jeep": { rate: 1350, fine50: 675, fine100: 1350, fine250: 3375, name: "Motor Car / Jeep" },
-      "M/Cycle": { rate: 450, fine50: 225, fine100: 450, fine250: 1125, name: "Motorcycle (Bike)" },
-      "M/Cycle+Car/Jeep": { rate: 1350, fine50: 675, fine100: 1350, fine250: 3375, name: "Motorcycle + Car" },
-      "LTV": { rate: 1850, fine50: 925, fine100: 1850, fine250: 4625, name: "LTV (Light Transport)" },
-      "HTV": { rate: 1850, fine50: 925, fine100: 1850, fine250: 4625, name: "HTV (Heavy Transport)" },
-      "LTV + PSV": { rate: 1850, fine50: 925, fine100: 1850, fine250: 4625, name: "LTV + PSV" },
-      "HTV + PSV": { rate: 1850, fine50: 925, fine100: 1850, fine250: 4625, name: "HTV + PSV" },
-      "Rickshaw": { rate: 400, fine50: 200, fine100: 400, fine250: 1000, name: "Rickshaw" },
-      "Tractor Commercial": { rate: 1400, fine50: 700, fine100: 1400, fine250: 3500, name: "Tractor Commercial" },
-      "Tractor Agri": { rate: 950, fine50: 475, fine100: 950, fine250: 2375, name: "Tractor Agriculture" },
-      "Invalid Carriage": { rate: 0, fine50: 0, fine100: 0, fine250: 0, name: "Invalid Carriage" }
+      "Car/Jeep": { rate: 1350, fine50: 675, fine100: 1350, fine250: 3375, name: "Motor Car / Jeep", isCommercial: false },
+      "M/Cycle": { rate: 450, fine50: 225, fine100: 450, fine250: 1125, name: "Motorcycle (Bike)", isCommercial: false },
+      "M/Cycle+Car/Jeep": { rate: 1350, fine50: 675, fine100: 1350, fine250: 3375, name: "Motorcycle + Car", isCommercial: false },
+      "LTV": { rate: 1850, fine50: 925, fine100: 1850, fine250: 4625, name: "LTV (Light Transport)", isCommercial: true },
+      "HTV": { rate: 1850, fine50: 925, fine100: 1850, fine250: 4625, name: "HTV (Heavy Transport)", isCommercial: true },
+      "LTV + PSV": { rate: 1850, fine50: 925, fine100: 1850, fine250: 4625, name: "LTV + PSV Commercial", isCommercial: true },
+      "HTV + PSV": { rate: 1850, fine50: 925, fine100: 1850, fine250: 4625, name: "HTV + PSV Commercial", isCommercial: true },
+      "Rickshaw": { rate: 400, fine50: 200, fine100: 400, fine250: 1000, name: "Rickshaw", isCommercial: false },
+      "Tractor Commercial": { rate: 1400, fine50: 700, fine100: 1400, fine250: 3500, name: "Tractor Commercial", isCommercial: true },
+      "Tractor Agri": { rate: 950, fine50: 475, fine100: 950, fine250: 2375, name: "Tractor Agriculture", isCommercial: false },
+      "Invalid Carriage": { rate: 0, fine50: 0, fine100: 0, fine250: 0, name: "Invalid Carriage", isCommercial: false }
     };
 
+    let isUrdu = false;
+
     function init() {
-      // Default dates: today and 5 years ago
+      // Default: today & 5 years ago
       const today = new Date();
       const past = new Date();
       past.setFullYear(today.getFullYear() - 5);
@@ -437,6 +733,34 @@
       document.getElementById("expiry-date").value = today.toISOString().split("T")[0];
       document.getElementById("issue-date").value = past.toISOString().split("T")[0];
 
+      // Register PWA service worker if supported
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      }
+
+      calculate();
+    }
+
+    // Shortcut date chips
+    function setShortcutDate(shortcut) {
+      const today = new Date();
+      let d = new Date();
+
+      if (shortcut === 'today') {
+        d = today;
+      } else if (shortcut === '45d') {
+        d.setDate(today.getDate() - 45); // 1-3m overdue (50%)
+      } else if (shortcut === '6m') {
+        d.setMonth(today.getMonth() - 6); // 3-12m overdue (100%)
+      } else if (shortcut === '1.5y') {
+        d.setFullYear(today.getFullYear() - 1);
+        d.setMonth(today.getMonth() - 6); // > 1y overdue (250%)
+      } else if (shortcut === '3.5y') {
+        d.setFullYear(today.getFullYear() - 3);
+        d.setMonth(today.getMonth() - 6); // > 3y overdue (Re-test alert)
+      }
+
+      document.getElementById("expiry-date").value = d.toISOString().split("T")[0];
       calculate();
     }
 
@@ -445,12 +769,11 @@
       const yearsSel = document.getElementById("years");
 
       if (type === "international") {
-        // Max 3 years for international
         if (parseInt(yearsSel.value) > 3) {
           yearsSel.value = "3";
         }
-        yearsSel.options[3].disabled = true; // 4 years
-        yearsSel.options[4].disabled = true; // 5 years
+        yearsSel.options[3].disabled = true; // 4y
+        yearsSel.options[4].disabled = true; // 5y
       } else {
         yearsSel.options[3].disabled = false;
         yearsSel.options[4].disabled = false;
@@ -468,11 +791,29 @@
       // 1. Base Fee
       const baseFee = cat.rate * years;
 
-      // 2. Fine calculation from Expiry Date
+      // Commercial Medical Alert
+      const medicalBox = document.getElementById("alert-medical-box");
+      if (cat.isCommercial) {
+        medicalBox.style.display = "flex";
+      } else {
+        medicalBox.style.display = "none";
+      }
+
+      // Savings Hint
+      const savingsHint = document.getElementById("savings-hint");
+      if (years === 5) {
+        savingsHint.style.display = "flex";
+        savingsHint.textContent = "💡 Renewing for 5 years saves you Rs. 1,920 in recurring courier charges over annual renewals.";
+      } else {
+        savingsHint.style.display = "none";
+      }
+
+      // 2. Late Fine calculation
       let fine = 0;
       let statusClass = "status-valid";
       let statusIcon = "✓";
-      let statusMsg = "License is active and valid (No late fine applies).";
+      let statusMsg = isUrdu ? "لائسنس فعال اور درست ہے (کوئی تاخیری جرمانہ نہیں)۔" : "License is active and valid (No late fine applies).";
+      let isRetestNeeded = false;
 
       if (expiryVal) {
         const expiry = new Date(expiryVal + "T00:00:00");
@@ -485,38 +826,45 @@
         if (diffDays <= 0) {
           statusClass = "status-valid";
           statusIcon = "✓";
-          statusMsg = `License is Active (${Math.abs(diffDays)} days remaining until expiry). No late fine.`;
+          statusMsg = isUrdu ? `لائسنس فعال ہے (${Math.abs(diffDays)} دن باقی ہیں)` : `License is Active (${Math.abs(diffDays)} days remaining until expiry). No late fine.`;
           fine = 0;
         } else if (diffDays <= 30) {
           statusClass = "status-grace";
           statusIcon = "⏳";
-          statusMsg = `Expired ${diffDays} days ago (Within 30-Day Grace Period). No late fine.`;
+          statusMsg = isUrdu ? `30 دن کی رعایتی مدت میں ہے (کوئی جرمانہ نہیں)` : `Expired ${diffDays} days ago (Within 30-Day Grace Period). No late fine.`;
           fine = 0;
         } else if (diffDays <= 90) {
           statusClass = "status-fine";
           statusIcon = "⚠️";
           fine = cat.fine50;
-          statusMsg = `Expired ${diffDays} days ago (1 to 3 Months Overdue): 50% Fine (+Rs. ${fine.toLocaleString()}) applied.`;
+          statusMsg = isUrdu ? `1 سے 3 ماہ تاخیر: 50 فیصد جرمانہ (+Rs. ${fine.toLocaleString()})` : `Expired ${diffDays} days ago (1 to 3 Months Overdue): 50% Fine (+Rs. ${fine.toLocaleString()}) applied.`;
         } else if (diffDays <= 365) {
           statusClass = "status-fine";
           statusIcon = "⚠️";
           fine = cat.fine100;
-          statusMsg = `Expired ${diffDays} days ago (3 Months to 1 Year Overdue): 100% Fine (+Rs. ${fine.toLocaleString()}) applied.`;
+          statusMsg = isUrdu ? `3 ماہ سے 1 سال تاخیر: 100 فیصد جرمانہ (+Rs. ${fine.toLocaleString()})` : `Expired ${diffDays} days ago (3 Months to 1 Year Overdue): 100% Fine (+Rs. ${fine.toLocaleString()}) applied.`;
         } else {
           statusClass = "status-severe";
           statusIcon = "🚨";
           fine = cat.fine250;
-          statusMsg = `Expired ${diffDays} days ago (Over 1 Year Overdue): 250% Fine (+Rs. ${fine.toLocaleString()}) applied.`;
+          statusMsg = isUrdu ? `1 سال سے زائد تاخیر: 250 فیصد جرمانہ (+Rs. ${fine.toLocaleString()})` : `Expired ${diffDays} days ago (Over 1 Year Overdue): 250% Fine (+Rs. ${fine.toLocaleString()}) applied.`;
+
+          if (diffDays > 365 * 3) {
+            isRetestNeeded = true;
+          }
         }
       }
 
-      // Update status box
+      // Update status pill
       const statusBox = document.getElementById("status-box");
       statusBox.className = "status-msg " + statusClass;
       document.getElementById("status-icon").textContent = statusIcon;
       document.getElementById("status-text").textContent = statusMsg;
 
-      // 3. Addon fees
+      // 3-Year Re-test Alert
+      document.getElementById("alert-retest-box").style.display = isRetestNeeded ? "flex" : "none";
+
+      // 3. Addons
       const hasFacilitator = document.getElementById("chk-facilitator").checked;
       const facilitatorFee = hasFacilitator ? 950 : 0;
 
@@ -525,7 +873,7 @@
 
       const platformFee = 15;
 
-      // 4. Total
+      // 4. Grand Total
       const grandTotal = baseFee + fine + facilitatorFee + courierFee + platformFee;
 
       // Update Result Display
@@ -549,15 +897,39 @@
       document.getElementById("row-courier").style.display = hasCourier ? "flex" : "none";
       document.getElementById("val-courier").textContent = `Rs. ${courierFee}`;
 
-      // Grand total
+      // Total
       document.getElementById("val-total").textContent = `Rs. ${grandTotal.toLocaleString()} PKR`;
+    }
+
+    // 1-Click WhatsApp Share
+    function shareWhatsApp() {
+      const cat = document.getElementById("category").options[document.getElementById("category").selectedIndex].text;
+      const years = document.getElementById("years").value;
+      const total = document.getElementById("val-total").textContent;
+      const base = document.getElementById("val-base").textContent;
+      const hasFine = document.getElementById("row-fine").style.display !== "none";
+      const fine = hasFine ? document.getElementById("val-fine").textContent : "Rs. 0";
+      const fac = document.getElementById("chk-facilitator").checked ? "Rs. 950" : "Rs. 0";
+      const cour = document.getElementById("chk-courier").checked ? "Rs. 480" : "Rs. 0";
+
+      const text = `*Punjab Driving License Renewal Fee Summary*\n` +
+        `• Category: ${cat}\n` +
+        `• Renewal Duration: ${years} Year(s)\n` +
+        `• Base Fee: ${base}\n` +
+        `• Late Fine: ${fine}\n` +
+        `• Dastak Facilitator: ${fac}\n` +
+        `• Courier Delivery: ${cour}\n` +
+        `• Platform Fee: Rs. 15\n` +
+        `*TOTAL PAYABLE: ${total}*\n\n` +
+        `Calculated via: https://itszeeshanrajput.github.io/dlims-fee-calculator/`;
+
+      const url = "https://wa.me/?text=" + encodeURIComponent(text);
+      window.open(url, "_blank");
     }
 
     function copyBreakdown() {
       const cat = document.getElementById("category").options[document.getElementById("category").selectedIndex].text;
       const years = document.getElementById("years").value;
-      const issue = document.getElementById("issue-date").value;
-      const expiry = document.getElementById("expiry-date").value;
       const total = document.getElementById("val-total").textContent;
       const base = document.getElementById("val-base").textContent;
       const hasFine = document.getElementById("row-fine").style.display !== "none";
@@ -567,21 +939,73 @@
 
       const txt = `PUNJAB DRIVING LICENSE RENEWAL\n` +
         `Category: ${cat}\n` +
-        `Renewal: ${years} Year(s)\n` +
-        `Issue Date: ${issue}\n` +
-        `Expiry Date: ${expiry}\n` +
+        `Duration: ${years} Year(s)\n` +
         `Base Fee: ${base}\n` +
         `Late Fine: ${fine}\n` +
         `Dastak Facilitator: ${fac}\n` +
         `Courier Delivery: ${cour}\n` +
         `Platform Fee: Rs. 15\n` +
-        `TOTAL PAYABLE: ${total}`;
+        `TOTAL PAYABLE: ${total}\n` +
+        `Source: https://dlims.punjab.gov.pk/fee_structure`;
 
       navigator.clipboard.writeText(txt).then(() => {
         alert("Summary copied to clipboard!");
       }).catch(() => {
         prompt("Copy text:", txt);
       });
+    }
+
+    function openPaymentGuide() {
+      document.getElementById("payment-modal").style.display = "flex";
+    }
+
+    function closePaymentGuide() {
+      document.getElementById("payment-modal").style.display = "none";
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      if (isDark) {
+        document.documentElement.removeAttribute("data-theme");
+        document.getElementById("btn-theme").textContent = "🌙";
+      } else {
+        document.documentElement.setAttribute("data-theme", "dark");
+        document.getElementById("btn-theme").textContent = "☀️";
+      }
+    }
+
+    function toggleLanguage() {
+      isUrdu = !isUrdu;
+      document.body.classList.toggle("lang-ur", isUrdu);
+      document.getElementById("btn-lang").textContent = isUrdu ? "English" : "اردو";
+
+      if (isUrdu) {
+        document.getElementById("ui-title").textContent = "پنجاب ڈرائیونگ لائسنس تجدید فیس کیلکولیٹر";
+        document.getElementById("ui-subtitle").textContent = "حکومت پنجاب • DLIMS اور دستک فیس شیڈول";
+        document.getElementById("lbl-issue").textContent = "1. لائسنس جاری ہونے کی تاریخ (تاریخ اجراء)";
+        document.getElementById("lbl-expiry").textContent = "2. لائسنس کی معیاد ختم ہونے کی تاریخ (تاریخ تنسیخ)";
+        document.getElementById("lbl-type").textContent = "3. لائسنس کی قسم";
+        document.getElementById("lbl-cat").textContent = "4. گاڑی کی کیٹیگری";
+        document.getElementById("lbl-years").textContent = "5. کتنے سال کے لیے تجدید کروانی ہے؟";
+        document.getElementById("lbl-fac-title").textContent = "دستک ڈور سٹیپ فیسیلیٹیٹر فیس (950 روپے)";
+        document.getElementById("lbl-cour-title").textContent = "سمارٹ کارڈ کورئیر ڈلیوری فیس (480 روپے)";
+        document.getElementById("lbl-breakdown-title").textContent = "فیس کی تفصیل اور کل رقم";
+        document.getElementById("txt-total-label").textContent = "کل واجب الادا رقم:";
+      } else {
+        document.getElementById("ui-title").textContent = "Punjab Driving License Renewal Calculator";
+        document.getElementById("ui-subtitle").textContent = "Official DLIMS & Dastak Platform Fee Schedule";
+        document.getElementById("lbl-issue").textContent = "1. License Issue Date (تاریخ اجراء)";
+        document.getElementById("lbl-expiry").textContent = "2. License Expiry Date (تاریخ تنسیخ)";
+        document.getElementById("lbl-type").textContent = "3. License Type";
+        document.getElementById("lbl-cat").textContent = "4. Vehicle Category";
+        document.getElementById("lbl-years").textContent = "5. How many years do you want to renew?";
+        document.getElementById("lbl-fac-title").textContent = "Dastak Doorstep Facilitator Fee (Rs. 950)";
+        document.getElementById("lbl-cour-title").textContent = "Smart Card Courier Delivery Fee (Rs. 480)";
+        document.getElementById("lbl-breakdown-title").textContent = "Fee Breakdown & Final Total";
+        document.getElementById("txt-total-label").textContent = "Total Payable Amount:";
+      }
+
+      calculate();
     }
 
     window.addEventListener("DOMContentLoaded", init);
