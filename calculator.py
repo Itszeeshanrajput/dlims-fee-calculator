@@ -110,6 +110,88 @@ def calculate_renewal(
         "total_fee": total
     }
 
+def calculate_all_years_quote(
+    service="regular",
+    category="Car/Jeep",
+    issue_date=None,
+    expiry_date=None,
+    include_facilitator=True,
+    include_courier=True,
+    include_platform=True
+):
+    max_years = 3 if service == "international" else 5
+    breakdown = []
+    first_res = None
+    for y in range(1, max_years + 1):
+        res = calculate_renewal(
+            service=service,
+            category=category,
+            issue_date=issue_date,
+            expiry_date=expiry_date,
+            years=y,
+            include_facilitator=include_facilitator,
+            include_courier=include_courier,
+            include_platform=include_platform
+        )
+        if first_res is None:
+            first_res = res
+        breakdown.append({
+            "years": y,
+            "base_license_fee": res["base_license_fee"],
+            "total_fee": res["total_fee"]
+        })
+
+    return {
+        "service": first_res["service"],
+        "category": first_res["category"],
+        "rate_per_annum": first_res["rate_per_annum"],
+        "issue_date": issue_date,
+        "expiry_date": expiry_date,
+        "fine_amount": first_res["fine_amount"],
+        "fine_status": first_res["fine_status"],
+        "facilitator_fee": first_res["facilitator_fee"],
+        "courier_fee": first_res["courier_fee"],
+        "platform_fee": first_res["platform_fee"],
+        "years_breakdown": breakdown
+    }
+
+def format_citizen_quote(quote_data, is_urdu=False):
+    if is_urdu:
+        lines = [
+            "*پنجاب ڈرائیونگ لائسنس تجدید - سرکاری فیس کوٹیشن*",
+            f"🚗 کیٹیگری: {quote_data['category']}",
+            f"📅 صورتحال: {quote_data['fine_status']}",
+            f"✅ شامل اخراجات: دستک ({quote_data['facilitator_fee']} روپے) | کوریئر ({quote_data['courier_fee']} روپے) | آئی ٹی ({quote_data['platform_fee']} روپے)",
+            "",
+            "*کل واجب الادا رقم سال کے حساب سے:*"
+        ]
+        for item in quote_data["years_breakdown"]:
+            best = " (⭐ تجویز کردہ)" if item["years"] == len(quote_data["years_breakdown"]) else ""
+            lines.append(f"• {item['years']} سال: Rs. {item['total_fee']:,} روپے{best}")
+        lines.extend([
+            "",
+            "💳 ادائیگی: جاز کیش، ایزی پیسہ یا موبائل بینکنگ میں 17 ہندسوں کے PSID سے کریں۔",
+            "حکومت پنجاب • DLIMS اور مریم کی دستک پلیٹ فارم"
+        ])
+    else:
+        lines = [
+            "*PUNJAB DRIVING LICENSE RENEWAL - OFFICIAL QUOTE*",
+            f"🚗 Category: {quote_data['category']}",
+            f"📅 Status: {quote_data['fine_status']}",
+            f"✅ Included: Dastak (Rs. {quote_data['facilitator_fee']}) | Courier (Rs. {quote_data['courier_fee']}) | IT (Rs. {quote_data['platform_fee']})",
+            "",
+            "*TOTAL PAYABLE BY DURATION:*"
+        ]
+        for item in quote_data["years_breakdown"]:
+            best = " (⭐ Recommended - Best Value)" if item["years"] == len(quote_data["years_breakdown"]) else ""
+            lines.append(f"• {item['years']} Year{'s' if item['years'] > 1 else ''}:  Rs. {item['total_fee']:,}{best}")
+        lines.extend([
+            "",
+            "💳 Pay via 17-digit PSID on JazzCash, EasyPaisa, or 1Bill Mobile Banking.",
+            "Official DLIMS Punjab & Maryam Ki Dastak Platform"
+        ])
+    return "\n".join(lines)
+
 def print_renewal_slip(result):
     print("=" * 60)
     print("      GOVERNMENT OF PUNJAB - DLIMS & DASTAK 2.0     ")
@@ -145,14 +227,27 @@ if __name__ == "__main__":
     parser.add_argument("--no-facilitator", action="store_true", help="Exclude Rs. 950 facilitator")
     parser.add_argument("--no-courier", action="store_true", help="Exclude Rs. 480 courier")
 
+    parser.add_argument("--all-years", action="store_true", help="Generate 1-5 years quote for citizens")
+
     args = parser.parse_args()
-    res = calculate_renewal(
-        service=args.service,
-        category=args.cat,
-        issue_date=args.issue,
-        expiry_date=args.expiry,
-        years=args.years,
-        include_facilitator=not args.no_facilitator,
-        include_courier=not args.no_courier
-    )
-    print_renewal_slip(res)
+    if args.all_years:
+        quote = calculate_all_years_quote(
+            service=args.service,
+            category=args.cat,
+            issue_date=args.issue,
+            expiry_date=args.expiry,
+            include_facilitator=not args.no_facilitator,
+            include_courier=not args.no_courier
+        )
+        print(format_citizen_quote(quote))
+    else:
+        res = calculate_renewal(
+            service=args.service,
+            category=args.cat,
+            issue_date=args.issue,
+            expiry_date=args.expiry,
+            years=args.years,
+            include_facilitator=not args.no_facilitator,
+            include_courier=not args.no_courier
+        )
+        print_renewal_slip(res)

@@ -6,7 +6,7 @@ Tests renewal logic, date parsing, late fines, Dastak facilitator, and courier f
 
 import unittest
 import datetime
-from calculator import calculate_renewal, get_fine_from_expiry_date, RATES
+from calculator import calculate_renewal, calculate_all_years_quote, format_citizen_quote, get_fine_from_expiry_date, RATES
 
 class TestRenewalCalculations(unittest.TestCase):
 
@@ -71,6 +71,25 @@ class TestRenewalCalculations(unittest.TestCase):
         self.assertEqual(res["base_license_fee"], 0)
         self.assertEqual(res["fine_amount"], 0)
         self.assertEqual(res["total_fee"], 0)
+
+    def test_all_years_quote_breakdown(self):
+        # 1-5 years quote for Car/Jeep with valid license
+        future_date = (datetime.date.today() + datetime.timedelta(days=30)).strftime("%Y-%m-%d")
+        quote = calculate_all_years_quote(service="regular", category="Car/Jeep", expiry_date=future_date, include_facilitator=True, include_courier=True, include_platform=True)
+        self.assertEqual(len(quote["years_breakdown"]), 5)
+        # Year 1: 1350 + 950 + 480 + 15 = 2795
+        self.assertEqual(quote["years_breakdown"][0]["total_fee"], 2795)
+        # Year 5: 6750 + 950 + 480 + 15 = 8195
+        self.assertEqual(quote["years_breakdown"][4]["total_fee"], 8195)
+        # Citizen quote string
+        txt = format_citizen_quote(quote, is_urdu=False)
+        self.assertIn("• 1 Year:  Rs. 2,795", txt)
+        self.assertIn("• 5 Years:  Rs. 8,195", txt)
+
+        # Urdu citizen quote string
+        txt_ur = format_citizen_quote(quote, is_urdu=True)
+        self.assertIn("1 سال: Rs. 2,795", txt_ur)
+        self.assertIn("5 سال: Rs. 8,195", txt_ur)
 
 if __name__ == "__main__":
     unittest.main()

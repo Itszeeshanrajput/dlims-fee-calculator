@@ -378,6 +378,316 @@
       }
     }
 
+    /* QUICK CATEGORY PILLS */
+    .quick-category-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.4rem;
+    }
+
+    .cat-pill {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 0.3rem 0.55rem;
+      font-size: 0.73rem;
+      font-weight: 600;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .cat-pill:hover {
+      border-color: #059669;
+      background: #e2e8f0;
+    }
+
+    .cat-pill.active {
+      background: #059669;
+      color: #ffffff;
+      border-color: #059669;
+      box-shadow: 0 1px 3px rgba(5, 150, 105, 0.25);
+    }
+
+    [data-theme="dark"] .cat-pill {
+      background: #1e293b;
+      border-color: #334155;
+      color: #cbd5e1;
+    }
+
+    [data-theme="dark"] .cat-pill.active {
+      background: #059669;
+      color: #ffffff;
+      border-color: #059669;
+    }
+
+    /* QUICK YEAR BUTTONS */
+    .years-pill-group {
+      display: flex;
+      gap: 0.4rem;
+      margin-top: 0.35rem;
+    }
+
+    .year-btn {
+      flex: 1;
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 0.6rem 0.3rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #334155;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.1rem;
+    }
+
+    .year-btn:hover {
+      border-color: #059669;
+      background: #f1f5f9;
+    }
+
+    .year-btn.active {
+      background: #059669;
+      color: #ffffff;
+      border-color: #059669;
+      box-shadow: 0 2px 4px rgba(5, 150, 105, 0.25);
+    }
+
+    .year-btn.disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    [data-theme="dark"] .year-btn {
+      background: #1e293b;
+      border-color: #334155;
+      color: #cbd5e1;
+    }
+
+    [data-theme="dark"] .year-btn.active {
+      background: #059669;
+      color: #ffffff;
+      border-color: #059669;
+    }
+
+    /* 1-5 YEARS ALL-IN-ONE COMPARISON CARD */
+    .all-years-card {
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 1.1rem;
+      transition: background-color 0.2s, border-color 0.2s;
+    }
+
+    [data-theme="dark"] .all-years-card {
+      background: #131c2e;
+      border-color: #334155;
+    }
+
+    .all-years-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .all-years-title {
+      font-size: 0.84rem;
+      font-weight: 800;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    [data-theme="dark"] .all-years-title {
+      color: #f8fafc;
+    }
+
+    .all-years-subtitle {
+      font-size: 0.72rem;
+      color: #64748b;
+      margin-top: 0.15rem;
+    }
+
+    .all-years-actions {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-mini-action {
+      padding: 0.4rem 0.75rem;
+      font-size: 0.76rem;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.15s ease;
+    }
+
+    .btn-mini-copy {
+      background: #0f172a;
+      color: #ffffff;
+    }
+    .btn-mini-copy:hover {
+      background: #1e293b;
+    }
+
+    .btn-mini-wa {
+      background: #25D366;
+      color: #ffffff;
+    }
+    .btn-mini-wa:hover {
+      background: #20ba5a;
+    }
+
+    .all-years-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.5rem;
+      margin-top: 0.85rem;
+    }
+
+    @media (max-width: 580px) {
+      .all-years-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 380px) {
+      .all-years-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .year-card {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 0.65rem 0.35rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+    }
+
+    [data-theme="dark"] .year-card {
+      background: #1e293b;
+      border-color: #334155;
+    }
+
+    .year-card:hover {
+      border-color: #059669;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08);
+    }
+
+    .year-card.active {
+      border-color: #059669;
+      background: #ecfdf5;
+      box-shadow: 0 0 0 2px #059669;
+    }
+
+    [data-theme="dark"] .year-card.active {
+      background: #064e3b;
+      border-color: #10b981;
+      box-shadow: 0 0 0 2px #10b981;
+    }
+
+    .year-card-lbl {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #64748b;
+    }
+
+    [data-theme="dark"] .year-card-lbl {
+      color: #94a3b8;
+    }
+
+    .year-card-val {
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: #0f172a;
+      margin-top: 0.2rem;
+    }
+
+    [data-theme="dark"] .year-card-val {
+      color: #f8fafc;
+    }
+
+    .year-card.active .year-card-val {
+      color: #059669;
+    }
+
+    [data-theme="dark"] .year-card.active .year-card-val {
+      color: #34d399;
+    }
+
+    .year-card-tag {
+      font-size: 0.62rem;
+      font-weight: 800;
+      color: #047857;
+      background: #d1fae5;
+      border-radius: 4px;
+      padding: 1px 5px;
+      margin-top: 0.25rem;
+    }
+
+    [data-theme="dark"] .year-card-tag {
+      background: #065f46;
+      color: #a7f3d0;
+    }
+
+    /* FLOATING TOAST NOTIFICATION */
+    .toast-notice {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(30px);
+      background: #0f172a;
+      color: #ffffff;
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      max-width: 90%;
+      text-align: center;
+    }
+
+    .toast-notice.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
     button {
       padding: 0.7rem 0.85rem;
       font-size: 0.85rem;
@@ -483,7 +793,8 @@
         box-shadow: none;
         max-width: 100%;
       }
-      .header-actions, .date-shortcuts-bar, .actions-grid, .footer, .btn-secondary {
+      .header-actions, .date-shortcuts-bar, .actions-grid, .footer, .btn-secondary,
+      .quick-category-pills, .years-pill-group, .all-years-actions, .toast-notice {
         display: none !important;
       }
       .result-box {
@@ -505,6 +816,7 @@
         <p id="ui-subtitle">Official DLIMS & Dastak Platform Fee Schedule</p>
       </div>
       <div class="header-actions">
+        <button class="btn-top" onclick="resetDefaults()" title="Reset to default">🔄 Reset</button>
         <button class="btn-top" onclick="toggleLanguage()" id="btn-lang">اردو</button>
         <button class="btn-top" onclick="toggleTheme()" id="btn-theme" title="Toggle Theme">🌙</button>
       </div>
@@ -561,7 +873,7 @@
 
         <div class="form-group">
           <label for="category" id="lbl-cat">4. Vehicle Category</label>
-          <select id="category" onchange="calculate()">
+          <select id="category" onchange="onCategorySelectChange()">
             <option value="Car/Jeep" selected>🚗 Motor Car / Jeep (Rs. 1,350/yr)</option>
             <option value="M/Cycle">🏍️ Motorcycle / Bike (Rs. 450/yr)</option>
             <option value="M/Cycle+Car/Jeep">🏍️+🚗 Motorcycle + Car (Rs. 1,350/yr)</option>
@@ -574,6 +886,15 @@
             <option value="Tractor Agri">🌾 Tractor Agriculture (Rs. 950/yr)</option>
             <option value="Invalid Carriage">♿ Invalid Carriage (Free)</option>
           </select>
+          <!-- 1-TAP QUICK CATEGORY PILLS -->
+          <div class="quick-category-pills" id="quick-cat-pills">
+            <span class="cat-pill active" onclick="setQuickCategory('Car/Jeep')" data-cat="Car/Jeep">🚗 Car/Jeep</span>
+            <span class="cat-pill" onclick="setQuickCategory('M/Cycle')" data-cat="M/Cycle">🏍️ Bike</span>
+            <span class="cat-pill" onclick="setQuickCategory('M/Cycle+Car/Jeep')" data-cat="M/Cycle+Car/Jeep">🏍️+🚗 Combo</span>
+            <span class="cat-pill" onclick="setQuickCategory('LTV')" data-cat="LTV">🚐 LTV</span>
+            <span class="cat-pill" onclick="setQuickCategory('HTV')" data-cat="HTV">🚛 HTV</span>
+            <span class="cat-pill" onclick="setQuickCategory('Rickshaw')" data-cat="Rickshaw">🛺 Rickshaw</span>
+          </div>
         </div>
       </div>
 
@@ -588,7 +909,15 @@
       <!-- 3. RENEWAL YEARS (1, 2, 3, 4, 5) -->
       <div class="form-group">
         <label for="years" id="lbl-years">5. How many years do you want to renew?</label>
-        <select id="years" onchange="calculate()">
+        <!-- 1-TAP QUICK YEARS BUTTONS -->
+        <div class="years-pill-group" id="years-pill-group">
+          <button type="button" class="year-btn" onclick="setQuickYear(1)" data-year="1">1 Year</button>
+          <button type="button" class="year-btn" onclick="setQuickYear(2)" data-year="2">2 Years</button>
+          <button type="button" class="year-btn" onclick="setQuickYear(3)" data-year="3">3 Years</button>
+          <button type="button" class="year-btn" onclick="setQuickYear(4)" data-year="4">4 Years</button>
+          <button type="button" class="year-btn active" onclick="setQuickYear(5)" data-year="5">5 Years ⭐</button>
+        </div>
+        <select id="years" onchange="onYearSelectChange()" style="display: none;">
           <option value="1">1 Year</option>
           <option value="2">2 Years</option>
           <option value="3">3 Years</option>
@@ -623,9 +952,30 @@
         </label>
       </div>
 
-      <!-- 5. FINAL CALCULATION BREAKDOWN -->
+      <!-- 5. 1-TO-5 YEARS ALL-IN-ONE CITIZEN QUOTE CARD -->
+      <div class="all-years-card">
+        <div class="all-years-header">
+          <div>
+            <span class="all-years-title" id="lbl-all-years-title">⚡ 1–5 Years Fee Comparison (شہری فیس کوٹیشن)</span>
+            <div class="all-years-subtitle" id="lbl-all-years-sub">Tap any year to select, or copy all at once to send to the citizen.</div>
+          </div>
+          <div class="all-years-actions">
+            <button type="button" class="btn-mini-action btn-mini-copy" onclick="copyAllYearsQuote()" id="btn-copy-all-mini" title="Copy 1-5 years quote for citizen">
+              <span>📋</span> Copy All (1–5y)
+            </button>
+            <button type="button" class="btn-mini-action btn-mini-wa" onclick="shareWhatsAppAllYears()" id="btn-wa-all-mini" title="Send 1-5 years quote to citizen on WhatsApp">
+              <span>📲</span> WhatsApp All
+            </button>
+          </div>
+        </div>
+        <div class="all-years-grid" id="all-years-grid">
+          <!-- Dynamically populated with 1y, 2y, 3y, 4y, 5y cards -->
+        </div>
+      </div>
+
+      <!-- 6. FINAL CALCULATION BREAKDOWN FOR SELECTED YEAR -->
       <div class="result-box">
-        <div class="result-title" id="lbl-breakdown-title">Fee Breakdown & Final Total</div>
+        <div class="result-title" id="lbl-breakdown-title">Selected Duration Breakdown & Final Total</div>
 
         <div class="breakdown-row">
           <span id="txt-base-label">Base Renewal Fee (5 Years):</span>
@@ -658,16 +1008,22 @@
         </div>
       </div>
 
-      <!-- ACTION BUTTONS: WHATSAPP SHARE, PRINT, COPY & PAYMENT GUIDE -->
+      <!-- ACTION BUTTONS: CITIZEN QUOTE, WHATSAPP, PRINT & GUIDE -->
       <div class="actions-grid">
-        <button class="btn-whatsapp" onclick="shareWhatsApp()">
-          <span>📲</span> Share on WhatsApp
+        <button class="btn-whatsapp" onclick="shareWhatsAppAllYears()" id="btn-action-wa-all">
+          <span>📲</span> WhatsApp All (1–5y)
         </button>
-        <button class="btn-primary" onclick="window.print()">
+        <button class="btn-primary" onclick="copyAllYearsQuote()" id="btn-action-copy-all">
+          <span>📋</span> Copy All (1–5y) Quote
+        </button>
+        <button class="btn-secondary" onclick="shareWhatsAppSingle()" id="btn-action-wa-single">
+          <span>💬</span> WhatsApp Selected Slip
+        </button>
+        <button class="btn-secondary" onclick="copyBreakdown()" id="btn-action-copy-single">
+          <span>📄</span> Copy Selected Slip
+        </button>
+        <button class="btn-secondary" onclick="window.print()">
           <span>🖨️</span> Print Slip / Challan
-        </button>
-        <button class="btn-secondary" onclick="copyBreakdown()">
-          <span>📋</span> Copy Summary
         </button>
         <button class="btn-secondary" onclick="openPaymentGuide()">
           <span>💳</span> PSID Payment Guide
@@ -706,20 +1062,26 @@
     </div>
   </div>
 
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="toast-notice">
+    <span id="toast-icon">📋</span>
+    <span id="toast-text">Quote copied to clipboard!</span>
+  </div>
+
   <script>
     // Rates & Rules (100% verified DLIMS schedule)
     const RATES = {
-      "Car/Jeep": { rate: 1350, fine50: 675, fine100: 1350, fine250: 3375, name: "Motor Car / Jeep", isCommercial: false },
-      "M/Cycle": { rate: 450, fine50: 225, fine100: 450, fine250: 1125, name: "Motorcycle (Bike)", isCommercial: false },
-      "M/Cycle+Car/Jeep": { rate: 1350, fine50: 675, fine100: 1350, fine250: 3375, name: "Motorcycle + Car", isCommercial: false },
-      "LTV": { rate: 1850, fine50: 925, fine100: 1850, fine250: 4625, name: "LTV (Light Transport)", isCommercial: true },
-      "HTV": { rate: 1850, fine50: 925, fine100: 1850, fine250: 4625, name: "HTV (Heavy Transport)", isCommercial: true },
-      "LTV + PSV": { rate: 1850, fine50: 925, fine100: 1850, fine250: 4625, name: "LTV + PSV Commercial", isCommercial: true },
-      "HTV + PSV": { rate: 1850, fine50: 925, fine100: 1850, fine250: 4625, name: "HTV + PSV Commercial", isCommercial: true },
-      "Rickshaw": { rate: 400, fine50: 200, fine100: 400, fine250: 1000, name: "Rickshaw", isCommercial: false },
-      "Tractor Commercial": { rate: 1400, fine50: 700, fine100: 1400, fine250: 3500, name: "Tractor Commercial", isCommercial: true },
-      "Tractor Agri": { rate: 950, fine50: 475, fine100: 950, fine250: 2375, name: "Tractor Agriculture", isCommercial: false },
-      "Invalid Carriage": { rate: 0, fine50: 0, fine100: 0, fine250: 0, name: "Invalid Carriage", isCommercial: false }
+      "Car/Jeep": { rate: 1350, fine50: 675, fine100: 1350, fine250: 3375, name: "Motor Car / Jeep", nameUr: "موٹر کار / جیپ", isCommercial: false },
+      "M/Cycle": { rate: 450, fine50: 225, fine100: 450, fine250: 1125, name: "Motorcycle (Bike)", nameUr: "موٹر سائیکل (بائیک)", isCommercial: false },
+      "M/Cycle+Car/Jeep": { rate: 1350, fine50: 675, fine100: 1350, fine250: 3375, name: "Motorcycle + Car", nameUr: "موٹر سائیکل + کار", isCommercial: false },
+      "LTV": { rate: 1850, fine50: 925, fine100: 1850, fine250: 4625, name: "LTV (Light Transport)", nameUr: "ایل ٹی وی (لائٹ ٹرانسپورٹ)", isCommercial: true },
+      "HTV": { rate: 1850, fine50: 925, fine100: 1850, fine250: 4625, name: "HTV (Heavy Transport)", nameUr: "ایچ ٹی وی (ہیوی ٹرانسپورٹ)", isCommercial: true },
+      "LTV + PSV": { rate: 1850, fine50: 925, fine100: 1850, fine250: 4625, name: "LTV + PSV Commercial", nameUr: "ایل ٹی وی + پی ایس وی کمرشل", isCommercial: true },
+      "HTV + PSV": { rate: 1850, fine50: 925, fine100: 1850, fine250: 4625, name: "HTV + PSV Commercial", nameUr: "ایچ ٹی وی + پی ایس وی کمرشل", isCommercial: true },
+      "Rickshaw": { rate: 400, fine50: 200, fine100: 400, fine250: 1000, name: "Rickshaw", nameUr: "رکشہ", isCommercial: false },
+      "Tractor Commercial": { rate: 1400, fine50: 700, fine100: 1400, fine250: 3500, name: "Tractor Commercial", nameUr: "ٹریکٹر کمرشل", isCommercial: true },
+      "Tractor Agri": { rate: 950, fine50: 475, fine100: 950, fine250: 2375, name: "Tractor Agriculture", nameUr: "ٹریکٹر زرعی", isCommercial: false },
+      "Invalid Carriage": { rate: 0, fine50: 0, fine100: 0, fine250: 0, name: "Invalid Carriage", nameUr: "معذور افراد گاڑی", isCommercial: false }
     };
 
     let isUrdu = false;
@@ -739,6 +1101,25 @@
       }
 
       calculate();
+    }
+
+    function resetDefaults() {
+      const today = new Date();
+      const past = new Date();
+      past.setFullYear(today.getFullYear() - 5);
+
+      document.getElementById("expiry-date").value = today.toISOString().split("T")[0];
+      document.getElementById("issue-date").value = past.toISOString().split("T")[0];
+      document.getElementById("license-type").value = "regular";
+      document.getElementById("category").value = "Car/Jeep";
+      document.getElementById("years").value = "5";
+      document.getElementById("chk-facilitator").checked = true;
+      document.getElementById("chk-courier").checked = true;
+
+      syncCategoryPills("Car/Jeep");
+      syncYearButtons(5);
+      onTypeChange();
+      showToast(isUrdu ? "فارم دوبارہ ری سیٹ کر دیا گیا ہے" : "Reset to default settings", "🔄");
     }
 
     // Shortcut date chips
@@ -764,19 +1145,79 @@
       calculate();
     }
 
+    // 1-Click Quick Category Pill Handler
+    function setQuickCategory(catVal) {
+      document.getElementById("category").value = catVal;
+      syncCategoryPills(catVal);
+      calculate();
+    }
+
+    function onCategorySelectChange() {
+      const catVal = document.getElementById("category").value;
+      syncCategoryPills(catVal);
+      calculate();
+    }
+
+    function syncCategoryPills(catVal) {
+      const pills = document.querySelectorAll("#quick-cat-pills .cat-pill");
+      pills.forEach(pill => {
+        if (pill.getAttribute("data-cat") === catVal) {
+          pill.classList.add("active");
+        } else {
+          pill.classList.remove("active");
+        }
+      });
+    }
+
+    // 1-Click Quick Year Button Handler
+    function setQuickYear(yearNum) {
+      document.getElementById("years").value = yearNum;
+      syncYearButtons(yearNum);
+      calculate();
+    }
+
+    function onYearSelectChange() {
+      const yearNum = parseInt(document.getElementById("years").value, 10);
+      syncYearButtons(yearNum);
+      calculate();
+    }
+
+    function syncYearButtons(yearNum) {
+      const btns = document.querySelectorAll("#years-pill-group .year-btn");
+      btns.forEach(btn => {
+        const y = parseInt(btn.getAttribute("data-year"), 10);
+        if (y === yearNum) {
+          btn.classList.add("active");
+        } else {
+          btn.classList.remove("active");
+        }
+      });
+    }
+
     function onTypeChange() {
       const type = document.getElementById("license-type").value;
       const yearsSel = document.getElementById("years");
+      const yearBtns = document.querySelectorAll("#years-pill-group .year-btn");
 
       if (type === "international") {
         if (parseInt(yearsSel.value) > 3) {
           yearsSel.value = "3";
+          syncYearButtons(3);
         }
         yearsSel.options[3].disabled = true; // 4y
         yearsSel.options[4].disabled = true; // 5y
+        yearBtns.forEach(btn => {
+          const y = parseInt(btn.getAttribute("data-year"), 10);
+          if (y > 3) {
+            btn.classList.add("disabled");
+          } else {
+            btn.classList.remove("disabled");
+          }
+        });
       } else {
         yearsSel.options[3].disabled = false;
         yearsSel.options[4].disabled = false;
+        yearBtns.forEach(btn => btn.classList.remove("disabled"));
       }
 
       calculate();
@@ -787,6 +1228,8 @@
       const cat = RATES[catKey] || RATES["Car/Jeep"];
       const years = parseInt(document.getElementById("years").value, 10);
       const expiryVal = document.getElementById("expiry-date").value;
+      const isInternational = document.getElementById("license-type").value === "international";
+      const maxYears = isInternational ? 3 : 5;
 
       // 1. Base Fee
       const baseFee = cat.rate * years;
@@ -801,15 +1244,18 @@
 
       // Savings Hint
       const savingsHint = document.getElementById("savings-hint");
-      if (years === 5) {
+      if (years === 5 && !isInternational) {
         savingsHint.style.display = "flex";
-        savingsHint.textContent = "💡 Renewing for 5 years saves you Rs. 1,920 in recurring courier charges over annual renewals.";
+        savingsHint.textContent = isUrdu 
+          ? "💡 5 سال کی تجدید سے ہر سال کی بار بار کوریئر فیس میں 1,920 روپے کی بچت ہوتی ہے۔"
+          : "💡 Renewing for 5 years saves you Rs. 1,920 in recurring courier charges over annual renewals.";
       } else {
         savingsHint.style.display = "none";
       }
 
       // 2. Late Fine calculation
       let fine = 0;
+      let fineTier = "0%";
       let statusClass = "status-valid";
       let statusIcon = "✓";
       let statusMsg = isUrdu ? "لائسنس فعال اور درست ہے (کوئی تاخیری جرمانہ نہیں)۔" : "License is active and valid (No late fine applies).";
@@ -828,25 +1274,30 @@
           statusIcon = "✓";
           statusMsg = isUrdu ? `لائسنس فعال ہے (${Math.abs(diffDays)} دن باقی ہیں)` : `License is Active (${Math.abs(diffDays)} days remaining until expiry). No late fine.`;
           fine = 0;
+          fineTier = "0%";
         } else if (diffDays <= 30) {
           statusClass = "status-grace";
           statusIcon = "⏳";
           statusMsg = isUrdu ? `30 دن کی رعایتی مدت میں ہے (کوئی جرمانہ نہیں)` : `Expired ${diffDays} days ago (Within 30-Day Grace Period). No late fine.`;
           fine = 0;
+          fineTier = "0% Grace";
         } else if (diffDays <= 90) {
           statusClass = "status-fine";
           statusIcon = "⚠️";
           fine = cat.fine50;
+          fineTier = "50%";
           statusMsg = isUrdu ? `1 سے 3 ماہ تاخیر: 50 فیصد جرمانہ (+Rs. ${fine.toLocaleString()})` : `Expired ${diffDays} days ago (1 to 3 Months Overdue): 50% Fine (+Rs. ${fine.toLocaleString()}) applied.`;
         } else if (diffDays <= 365) {
           statusClass = "status-fine";
           statusIcon = "⚠️";
           fine = cat.fine100;
+          fineTier = "100%";
           statusMsg = isUrdu ? `3 ماہ سے 1 سال تاخیر: 100 فیصد جرمانہ (+Rs. ${fine.toLocaleString()})` : `Expired ${diffDays} days ago (3 Months to 1 Year Overdue): 100% Fine (+Rs. ${fine.toLocaleString()}) applied.`;
         } else {
           statusClass = "status-severe";
           statusIcon = "🚨";
           fine = cat.fine250;
+          fineTier = "250%";
           statusMsg = isUrdu ? `1 سال سے زائد تاخیر: 250 فیصد جرمانہ (+Rs. ${fine.toLocaleString()})` : `Expired ${diffDays} days ago (Over 1 Year Overdue): 250% Fine (+Rs. ${fine.toLocaleString()}) applied.`;
 
           if (diffDays > 365 * 3) {
@@ -873,11 +1324,13 @@
 
       const platformFee = 15;
 
-      // 4. Grand Total
+      // 4. Grand Total for current selection
       const grandTotal = baseFee + fine + facilitatorFee + courierFee + platformFee;
 
       // Update Result Display
-      document.getElementById("txt-base-label").textContent = `Base Renewal Fee (${cat.rate} × ${years}y):`;
+      document.getElementById("txt-base-label").textContent = isUrdu 
+        ? `بنیادی تجدید فیس (${cat.rate} × ${years} سال):`
+        : `Base Renewal Fee (${cat.rate} × ${years}y):`;
       document.getElementById("val-base").textContent = `Rs. ${baseFee.toLocaleString()}`;
 
       // Fine row
@@ -899,10 +1352,125 @@
 
       // Total
       document.getElementById("val-total").textContent = `Rs. ${grandTotal.toLocaleString()} PKR`;
+
+      // 5. UPDATE ALL-YEARS (1 to 5) SCHEDULE GRID
+      renderAllYearsGrid({
+        cat,
+        maxYears,
+        activeYears: years,
+        fine,
+        facilitatorFee,
+        courierFee,
+        platformFee
+      });
     }
 
-    // 1-Click WhatsApp Share
-    function shareWhatsApp() {
+    // Render 1 to 5 years comparison grid
+    function renderAllYearsGrid(data) {
+      const grid = document.getElementById("all-years-grid");
+      grid.innerHTML = "";
+
+      for (let y = 1; y <= data.maxYears; y++) {
+        const yBase = data.cat.rate * y;
+        const yTotal = yBase + data.fine + data.facilitatorFee + data.courierFee + data.platformFee;
+        const isActive = (y === data.activeYears);
+
+        const card = document.createElement("div");
+        card.className = "year-card" + (isActive ? " active" : "");
+        card.onclick = () => setQuickYear(y);
+
+        const lblText = isUrdu ? `${y} سال` : `${y} Year${y > 1 ? 's' : ''}`;
+        const isBest = (y === data.maxYears);
+        const bestTag = isBest ? `<span class="year-card-tag">${isUrdu ? '⭐ تجویز کردہ' : '⭐ Best Value'}</span>` : '';
+
+        card.innerHTML = `
+          <div class="year-card-lbl">${lblText}</div>
+          <div class="year-card-val">Rs. ${yTotal.toLocaleString()}</div>
+          ${bestTag}
+        `;
+        grid.appendChild(card);
+      }
+    }
+
+    // Build formatted citizen quote text for all years
+    function generateCitizenQuoteText() {
+      const catKey = document.getElementById("category").value;
+      const cat = RATES[catKey] || RATES["Car/Jeep"];
+      const isInternational = document.getElementById("license-type").value === "international";
+      const maxYears = isInternational ? 3 : 5;
+
+      const hasFacilitator = document.getElementById("chk-facilitator").checked;
+      const facFee = hasFacilitator ? 950 : 0;
+      const hasCourier = document.getElementById("chk-courier").checked;
+      const courFee = hasCourier ? 480 : 0;
+      const platFee = 15;
+
+      // Fine from status
+      const fineRow = document.getElementById("row-fine");
+      const hasFine = fineRow && fineRow.style.display !== "none";
+      const fineAmount = hasFine ? parseInt(document.getElementById("val-fine").textContent.replace(/[^0-9]/g, ""), 10) : 0;
+      const statusText = document.getElementById("status-text").textContent;
+
+      if (isUrdu) {
+        let lines = [
+          `*پنجاب ڈرائیونگ لائسنس تجدید - سرکاری فیس کوٹیشن*`,
+          `🚗 گاڑی کی کیٹیگری: ${cat.nameUr || cat.name}`,
+          `📅 لائسنس کی صورتحال: ${statusText}`,
+          `✅ شامل اخراجات: دستک (${hasFacilitator ? '950 روپے' : 'شامل نہیں'}) | کوریئر (${hasCourier ? '480 روپے' : 'شامل نہیں'}) | آئی ٹی (15 روپے)`,
+          ``,
+          `*کل واجب الادا رقم سال کے حساب سے:*`
+        ];
+        for (let y = 1; y <= maxYears; y++) {
+          const tot = (cat.rate * y) + fineAmount + facFee + courFee + platFee;
+          const best = (y === maxYears) ? " (⭐ تجویز کردہ - کوریئر فیس کی بچت)" : "";
+          lines.push(`• ${y} سال: ${tot.toLocaleString()} روپے${best}`);
+        }
+        lines.push(``);
+        lines.push(`💳 ادائیگی کا طریقہ: جاز کیش، ایزی پیسہ یا بینک ایپ میں 17 ہندسوں کے PSID سے ادا کریں۔`);
+        lines.push(`حکومت پنجاب • DLIMS اور مریم کی دستک پلیٹ فارم`);
+        lines.push(`آن لائن کیلکولیٹر: https://itszeeshanrajput.github.io/dlims-fee-calculator/`);
+        return lines.join("\n");
+      } else {
+        let lines = [
+          `*PUNJAB DRIVING LICENSE RENEWAL - OFFICIAL QUOTE*`,
+          `🚗 Vehicle Category: ${cat.name}`,
+          `📅 License Status: ${statusText}`,
+          `✅ Included: Dastak (${hasFacilitator ? 'Rs. 950' : 'Excluded'}) | Courier (${hasCourier ? 'Rs. 480' : 'Excluded'}) | IT Platform (Rs. 15)`,
+          ``,
+          `*TOTAL PAYABLE (BY DURATION):*`
+        ];
+        for (let y = 1; y <= maxYears; y++) {
+          const tot = (cat.rate * y) + fineAmount + facFee + courFee + platFee;
+          const best = (y === maxYears) ? " (⭐ Recommended - Best Value)" : "";
+          lines.push(`• ${y} Year${y > 1 ? 's' : ''}:  Rs. ${tot.toLocaleString()}${best}`);
+        }
+        lines.push(``);
+        lines.push(`💳 Easy Payment: Pay via 17-digit PSID on JazzCash, EasyPaisa, or 1Bill Mobile Banking.`);
+        lines.push(`Official DLIMS Punjab & Maryam Ki Dastak Platform`);
+        lines.push(`Verify anytime: https://itszeeshanrajput.github.io/dlims-fee-calculator/`);
+        return lines.join("\n");
+      }
+    }
+
+    // 1-Click Copy All Years Quote
+    function copyAllYearsQuote() {
+      const text = generateCitizenQuoteText();
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(isUrdu ? "تمام سالوں کی کوٹیشن کاپی ہو گئی! شہری کو بھیجیں" : "All Years (1–5y) Quote copied! Ready to send to citizen.", "📋");
+      }).catch(() => {
+        prompt(isUrdu ? "کوٹیشن کاپی کریں:" : "Copy quote text:", text);
+      });
+    }
+
+    // 1-Click WhatsApp Share All Years Quote
+    function shareWhatsAppAllYears() {
+      const text = generateCitizenQuoteText();
+      const url = "https://wa.me/?text=" + encodeURIComponent(text);
+      window.open(url, "_blank");
+    }
+
+    // Single selected year slip WhatsApp
+    function shareWhatsAppSingle() {
       const cat = document.getElementById("category").options[document.getElementById("category").selectedIndex].text;
       const years = document.getElementById("years").value;
       const total = document.getElementById("val-total").textContent;
@@ -927,6 +1495,7 @@
       window.open(url, "_blank");
     }
 
+    // Single selected year slip copy
     function copyBreakdown() {
       const cat = document.getElementById("category").options[document.getElementById("category").selectedIndex].text;
       const years = document.getElementById("years").value;
@@ -949,18 +1518,33 @@
         `Source: https://dlims.punjab.gov.pk/fee_structure`;
 
       navigator.clipboard.writeText(txt).then(() => {
-        alert("Summary copied to clipboard!");
+        showToast(isUrdu ? "منتخب شدہ سال کی رسید کاپی ہو گئی!" : "Selected Year Slip copied to clipboard!", "📄");
       }).catch(() => {
         prompt("Copy text:", txt);
       });
+    }
+
+    // Floating Toast Handler
+    function showToast(msg, icon = "✅") {
+      const t = document.getElementById("toast");
+      if (!t) return;
+      document.getElementById("toast-icon").textContent = icon;
+      document.getElementById("toast-text").textContent = msg;
+      t.classList.add("show");
+      if (window.toastTimeout) clearTimeout(window.toastTimeout);
+      window.toastTimeout = setTimeout(() => {
+        t.classList.remove("show");
+      }, 2600);
     }
 
     function openPaymentGuide() {
       document.getElementById("payment-modal").style.display = "flex";
     }
 
-    function closePaymentGuide() {
-      document.getElementById("payment-modal").style.display = "none";
+    function closePaymentGuide(e) {
+      if (!e || e.target.id === "payment-modal" || e.target.tagName === "BUTTON") {
+        document.getElementById("payment-modal").style.display = "none";
+      }
     }
 
     function toggleTheme() {
@@ -979,6 +1563,9 @@
       document.body.classList.toggle("lang-ur", isUrdu);
       document.getElementById("btn-lang").textContent = isUrdu ? "English" : "اردو";
 
+      const catPills = document.querySelectorAll("#quick-cat-pills .cat-pill");
+      const yearBtns = document.querySelectorAll("#years-pill-group .year-btn");
+
       if (isUrdu) {
         document.getElementById("ui-title").textContent = "پنجاب ڈرائیونگ لائسنس تجدید فیس کیلکولیٹر";
         document.getElementById("ui-subtitle").textContent = "حکومت پنجاب • DLIMS اور دستک فیس شیڈول";
@@ -989,8 +1576,32 @@
         document.getElementById("lbl-years").textContent = "5. کتنے سال کے لیے تجدید کروانی ہے؟";
         document.getElementById("lbl-fac-title").textContent = "دستک ڈور سٹیپ فیسیلیٹیٹر فیس (950 روپے)";
         document.getElementById("lbl-cour-title").textContent = "سمارٹ کارڈ کورئیر ڈلیوری فیس (480 روپے)";
-        document.getElementById("lbl-breakdown-title").textContent = "فیس کی تفصیل اور کل رقم";
+        document.getElementById("lbl-all-years-title").textContent = "⚡ 1–5 سال کا مکمل فیس شیڈول (شہری کوٹیشن)";
+        document.getElementById("lbl-all-years-sub").textContent = "شہری کو بھیجنے کے لیے 1 کلک میں تمام سالوں کی فیس کاپی یا واٹس ایپ کریں۔";
+        document.getElementById("btn-copy-all-mini").innerHTML = "<span>📋</span> تمام سال کاپی کریں";
+        document.getElementById("btn-wa-all-mini").innerHTML = "<span>📲</span> تمام سال واٹس ایپ";
+        document.getElementById("lbl-breakdown-title").textContent = "منتخب شدہ مدت کی فیس تفصیل اور کل رقم";
         document.getElementById("txt-total-label").textContent = "کل واجب الادا رقم:";
+        document.getElementById("btn-action-wa-all").innerHTML = "<span>📲</span> تمام سال (1-5) واٹس ایپ";
+        document.getElementById("btn-action-copy-all").innerHTML = "<span>📋</span> تمام سال (1-5) کاپی کریں";
+        document.getElementById("btn-action-wa-single").innerHTML = "<span>💬</span> منتخب سال واٹس ایپ";
+        document.getElementById("btn-action-copy-single").innerHTML = "<span>📄</span> منتخب رسید کاپی کریں";
+
+        if (catPills.length >= 6) {
+          catPills[0].textContent = "🚗 کار / جیپ";
+          catPills[1].textContent = "🏍️ بائیک";
+          catPills[2].textContent = "🏍️+🚗 بائیک + کار";
+          catPills[3].textContent = "🚐 ایل ٹی وی";
+          catPills[4].textContent = "🚛 ایچ ٹی وی";
+          catPills[5].textContent = "🛺 رکشہ";
+        }
+        if (yearBtns.length >= 5) {
+          yearBtns[0].textContent = "1 سال";
+          yearBtns[1].textContent = "2 سال";
+          yearBtns[2].textContent = "3 سال";
+          yearBtns[3].textContent = "4 سال";
+          yearBtns[4].textContent = "5 سال ⭐";
+        }
       } else {
         document.getElementById("ui-title").textContent = "Punjab Driving License Renewal Calculator";
         document.getElementById("ui-subtitle").textContent = "Official DLIMS & Dastak Platform Fee Schedule";
@@ -1001,8 +1612,32 @@
         document.getElementById("lbl-years").textContent = "5. How many years do you want to renew?";
         document.getElementById("lbl-fac-title").textContent = "Dastak Doorstep Facilitator Fee (Rs. 950)";
         document.getElementById("lbl-cour-title").textContent = "Smart Card Courier Delivery Fee (Rs. 480)";
-        document.getElementById("lbl-breakdown-title").textContent = "Fee Breakdown & Final Total";
+        document.getElementById("lbl-all-years-title").textContent = "⚡ 1–5 Years Fee Comparison (شہری فیس کوٹیشن)";
+        document.getElementById("lbl-all-years-sub").textContent = "Tap any year to select, or copy all at once to send to the citizen.";
+        document.getElementById("btn-copy-all-mini").innerHTML = "<span>📋</span> Copy All (1–5y)";
+        document.getElementById("btn-wa-all-mini").innerHTML = "<span>📲</span> WhatsApp All";
+        document.getElementById("lbl-breakdown-title").textContent = "Selected Duration Breakdown & Final Total";
         document.getElementById("txt-total-label").textContent = "Total Payable Amount:";
+        document.getElementById("btn-action-wa-all").innerHTML = "<span>📲</span> WhatsApp All (1–5y)";
+        document.getElementById("btn-action-copy-all").innerHTML = "<span>📋</span> Copy All (1–5y) Quote";
+        document.getElementById("btn-action-wa-single").innerHTML = "<span>💬</span> WhatsApp Selected Slip";
+        document.getElementById("btn-action-copy-single").innerHTML = "<span>📄</span> Copy Selected Slip";
+
+        if (catPills.length >= 6) {
+          catPills[0].textContent = "🚗 Car/Jeep";
+          catPills[1].textContent = "🏍️ Bike";
+          catPills[2].textContent = "🏍️+🚗 Combo";
+          catPills[3].textContent = "🚐 LTV";
+          catPills[4].textContent = "🚛 HTV";
+          catPills[5].textContent = "🛺 Rickshaw";
+        }
+        if (yearBtns.length >= 5) {
+          yearBtns[0].textContent = "1 Year";
+          yearBtns[1].textContent = "2 Years";
+          yearBtns[2].textContent = "3 Years";
+          yearBtns[3].textContent = "4 Years";
+          yearBtns[4].textContent = "5 Years ⭐";
+        }
       }
 
       calculate();
